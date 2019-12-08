@@ -1,0 +1,29 @@
+{
+  "name": "PROJECT-TO-DO-LIST",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch --config webpack.config.js",
+    "sassgo": "sass --watch src/scss/mainStyle.scss:dist/assets/css/mainStyle.css",
+    "start": "run-script-os",
+    "start:win32": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777 --browser 'Chrome'",
+    "start:darwin:linux": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777 --browser 'Firefox Developer Edition'"
+  },
+  "keywords": [],
+  "author": "Christopher",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "browser-sync": "^2.26.7",
+    "run-script-os": "^1.0.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-minify-css": "^1.2.4"
+  },
+  "dependencies": {
+    "date-fns": "^2.8.1"
+  }
+}

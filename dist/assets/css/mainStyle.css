@@ -1,0 +1,33 @@
+.hi {
+  background: linear-gradient(to top, red, blue);
+}
+
+.container {
+  float: right;
+  width: 600px;
+  height: 800px;
+  border: 3px solid green;
+}
+
+.project-div-shortcut {
+  border: 3px solid orange;
+  min-height: 50px;
+}
+
+.project-more-details {
+  border: 2px solid pink;
+  height: 30px;
+}
+
+.d-none {
+  display: none;
+}
+
+.names-container {
+  float: left;
+  border: 2px solid brown;
+  width: 300px;
+  height: 800px;
+}
+
+/*# sourceMappingURL=mainStyle.css.map */
