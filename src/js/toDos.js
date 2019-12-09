@@ -8,26 +8,8 @@
 
 
 // THE IDS FOR TODOS WILL BE A DRAG, MAKING THEM FOR EVERY PROJECT WON'T DO THE THING AND THERE IS NEARLY NO NEED FOR THEM
-//Current id limit
-// let idCount = 1;
-// //Id array with all the ids that can be reused after toDos being deleted or completed
-// let arrayOfIdToBeAssignedAfterDeletingItems = [5];
-// //ID ASSIGNING FUNCTION
-// const assignId = () => {
-//   //we have no need to reuse deleted ids, make a new one
-//   if (arrayOfIdToBeAssignedAfterDeletingItems.length === 0) {
-//     return idCount++;
-//   } else {
-//     //If after deleting a toDo we still have an id unasigned, then use it
-//     var missingId = arrayOfIdToBeAssignedAfterDeletingItems.shift();
-//     return missingId;
-//   }
-// }
 
 //Function invoked when we delete a toDo from a list
-const deleteItem = (x) => {
-  arrayOfIdToBeAssignedAfterDeletingItems.push(x.id);
-}
 
 //Date check
 function checkDate(x) {
@@ -38,10 +20,10 @@ function checkDate(x) {
 
 //Main class for toDo objects
 class toDoClass {
-  constructor(title,description,dueDate,priority) {
+  constructor(title,description,priority) {
     this._title = title;
     this._description = description;
-    this._dueDate = dueDate;
+    // this._dueDate = dueDate;
     this._priority = priority;
     // this._id = assignId();
   }
@@ -57,24 +39,18 @@ class toDoClass {
   set description(value) {
     this._description = value;
   }
-  get dueDate() {
-    return this._dueDate;
-  }
-  set dueDate(value) {
-    this._dueDate = value;
-  }
+  // get dueDate() {
+  //   return this._dueDate;
+  // }
+  // set dueDate(value) {
+  //   this._dueDate = value;
+  // }
   get priority() {
     return this._priority;
   }
   set priority(value) {
     this._priority = value;
   }
-  // get id() {
-  //   return this._id;
-  // }
-  // set id(value) {
-  //   this._id = value;
-  // }
 
 }
 

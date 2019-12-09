@@ -14,7 +14,7 @@ import { format, isDate, formatDistanceToNow } from 'date-fns';
 
 //Current id limit
 let projectIdCount = 1;
-//Id array with all the ids that can be reused after toDos being deleted or completed
+//Id array with all the ids that can be reused after Project being deleted or completed
 let arrayOfProjectIdToBeAssignedAfterDeletingItems = [];
 //ID ASSIGNING FUNCTION
 const assignProjectId = () => {
@@ -22,8 +22,9 @@ const assignProjectId = () => {
   if (arrayOfProjectIdToBeAssignedAfterDeletingItems.length === 0) {
     return projectIdCount++;
   } else {
-    //If after deleting a toDo we still have an id unasigned, then use it
-    var missingId = arrayOfProjectIdToBeAssignedAfterDeletingItems.shift();
+    //If after deleting a Project we still have an id unasigned, then use it
+    //Sorry for the long variable, thought it's funny so I left it like that
+    var missingId = arrayOfProjectIdToBeAssignedAfterDeletingItems.splice(arrayOfProjectIdToBeAssignedAfterDeletingItems.indexOf(Math.min(...arrayOfProjectIdToBeAssignedAfterDeletingItems)),1);
     return missingId;
   }
 }
@@ -83,10 +84,8 @@ class Project {
   }
   addToDo(value) {
     if (value instanceof toDoClass) {
-      console.log(`value is an instance of toDoClass`);
       this._toDos.unshift(value);
     } else {
-      console.log('value is NOT and instance of toDoClass');
     }
 
   }
@@ -109,7 +108,6 @@ class Project {
   //ID to the missing Id's array
   get idToArray() {
     arrayOfProjectIdToBeAssignedAfterDeletingItems.push(this._id);
-    console.log(arrayOfProjectIdToBeAssignedAfterDeletingItems);
   }
 }
 
