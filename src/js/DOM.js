@@ -78,6 +78,13 @@ const createToDoMenuSpawner = (x,project,toDo) => {
 
     toDoEditModal.appendChild(toDoEditContainer);
 
+    let h3Text = document.createElement('h3');
+    h3Text.className = 'h3-modal-title';
+    h3Text.innerHTML = 'EDIT TODO';
+
+    toDoEditContainer.appendChild(h3Text);
+
+
     //title label and input
     let toDoEditRowTitle = document.createElement('div');
     toDoEditRowTitle.className = 'create-todo-row create-todo-row-title';
@@ -141,7 +148,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoIconsGrid.className = 'icons-grid';
     for( var i of iconsNamesArray) {
       let iconImg = document.createElement('img');
-      iconImg.className = 'icon-container-img';
+      iconImg.className = 'icon icon-container-img';
       iconImg.src = `./assets/imgs/icons/${i}`;
       iconImg.alt = 'icon';
       toDoIconsGrid.appendChild(iconImg);
@@ -197,6 +204,12 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoEditContainer.className = 'create-project-container create-todo-container';
 
     toDoEditModal.appendChild(toDoEditContainer);
+
+    let h3Text = document.createElement('h3');
+    h3Text.className = 'h3-modal-title';
+    h3Text.innerHTML = 'CREATE TODO';
+
+    toDoEditContainer.appendChild(h3Text);
 
     //title label and input
     let toDoEditRowTitle = document.createElement('div');
@@ -259,7 +272,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoIconsGrid.className = 'icons-grid';
     for( var i of iconsNamesArray) {
       let iconImg = document.createElement('img');
-      iconImg.className = 'icon-container-img';
+      iconImg.className = 'icon icon-container-img';
       iconImg.src = `./assets/imgs/icons/${i}`;
       iconImg.alt = 'icon';
       toDoIconsGrid.appendChild(iconImg);
@@ -323,6 +336,12 @@ const createProjectMenuSpawner = (project) => {
       projectEditContainer.className = 'create-project-container';
 
       projectEditModal.appendChild(projectEditContainer);
+
+      let h3Text = document.createElement('h3');
+      h3Text.className = 'h3-modal-title';
+      h3Text.innerHTML = 'EDIT PROJECT';
+
+      projectEditContainer.appendChild(h3Text);
 
       //title label and input
       let projectEditRowTitle = document.createElement('div');
@@ -438,6 +457,13 @@ const createProjectMenuSpawner = (project) => {
     projectEditContainer.className = 'create-project-container';
 
     projectEditModal.appendChild(projectEditContainer);
+
+    let h3Text = document.createElement('h3');
+    h3Text.className = 'h3-modal-title';
+    h3Text.innerHTML = 'CREATE PROJECT';
+
+    projectEditContainer.appendChild(h3Text);
+
 
     //title label and input
     let projectEditRowTitle = document.createElement('div');
@@ -576,7 +602,7 @@ function editToDo(project,toDo) {
       let toDoIconDiv = document.createElement('div');
       toDoIconDiv.className = 'to-do-icon-div';
       let toDoIcon = document.createElement('img');
-      toDoIcon.className = 'to-do-icon';
+      toDoIcon.className = 'icon to-do-icon';
       toDoIcon.src = `${i.icon}`;
       toDoIcon.innerHTML = 'toDo icon';
 
@@ -610,9 +636,9 @@ function editToDo(project,toDo) {
       //TODO EDIT
       let toDoEditDiv = document.createElement('div');
       toDoEditDiv.className = 'to-do-edit-div';
-      let toDoEditIcon = document.createElement('div');
-      toDoEditIcon.className = 'to-do-edit-icon';
-      toDoEditIcon.innerHTML = "click me to edit this toDo";
+      let toDoEditIcon = document.createElement('img');
+      toDoEditIcon.className = 'icon to-do-edit-icon';
+      toDoEditIcon.src = './assets/imgs/icons/edit.png';
 
       toDoEditDiv.appendChild(toDoEditIcon);
       informationDiv.appendChild(toDoEditDiv);
@@ -623,9 +649,9 @@ function editToDo(project,toDo) {
       //TODO DELETE
       let toDoDeleteDiv = document.createElement('div');
       toDoDeleteDiv.className = 'to-do-delete-div';
-      let toDoDeleteIcon = document.createElement('div');
-      toDoDeleteIcon.className = 'to-do-delete-icon';
-      toDoDeleteIcon.innerHTML = 'click me to DELETE THIS toDo';
+      let toDoDeleteIcon = document.createElement('img');
+      toDoDeleteIcon.className = 'icon to-do-delete-icon';
+      toDoDeleteIcon.src = './assets/imgs/icons/delete.png';
 
       toDoDeleteDiv.appendChild(toDoDeleteIcon);
       informationDiv.appendChild(toDoDeleteDiv);
@@ -708,9 +734,9 @@ function editToDo(project,toDo) {
 
           let projectEdit = document.createElement('div');
           projectEdit.classList.add('project-edit');
-          let projectEditIcon = document.createElement('div');
-          projectEditIcon.className = 'project-edit-icon';
-          projectEditIcon.innerHTML = "CLICK ME TO EDIT THIS PROJECT";
+          let projectEditIcon = document.createElement('img');
+          projectEditIcon.className = 'icon project-edit-icon';
+          projectEditIcon.src = './assets/imgs/icons/edit.png';
 
           projectEdit.appendChild(projectEditIcon);
 
@@ -722,17 +748,18 @@ function editToDo(project,toDo) {
           //More details arrow ================== and function listener
           let projectMoreDetails = document.createElement('div');
           projectMoreDetails.classList.add('project-more-details-container');
-          let projectMoreDetailsArrow = document.createElement('div');
-          projectMoreDetailsArrow.className = 'more-details-arrow';
-          projectMoreDetailsArrow.innerHTML = 'click for description';
+          let projectMoreDetailsArrow = document.createElement('img');
+          projectMoreDetailsArrow.className = 'icon more-details-arrow';
+          projectMoreDetailsArrow.src = './assets/imgs/icons/arrow.png';
           projectMoreDetails.appendChild(projectMoreDetailsArrow);
           projectMoreDetailsArrow.addEventListener("click", showMoreDetails);
 
           projectDiv.appendChild(projectName);
-          projectDiv.appendChild(projectTime);
-          projectDiv.appendChild(projectPriority);
           projectDiv.appendChild(projectEdit);
           projectDiv.appendChild(projectMoreDetails);
+          projectDiv.appendChild(projectTime);
+          projectDiv.appendChild(projectPriority);
+
 
           //The big actual ROW ===================================
           let projectDivAll = document.createElement('div');
@@ -755,8 +782,10 @@ function editToDo(project,toDo) {
           //Main "adder" of toDos
           let toDoAdd = document.createElement('div');
           toDoAdd.classList.add('to-do-add-div');
-          let toDoAddIcon = document.createElement('div');
+          let toDoAddIcon = document.createElement('img');
+          toDoAddIcon.classList.add('icon');
           toDoAddIcon.classList.add('to-do-add-icon');
+          toDoAddIcon.src = './assets/imgs/icons/plus.png';
           let toDoAddTextDiv = document.createElement('div');
           toDoAddTextDiv.classList.add('to-do-add-text-div');
           let toDoAddText = document.createElement('div');
@@ -774,7 +803,8 @@ function editToDo(project,toDo) {
           toDoAdd.appendChild(toDoAddIcon);
           toDoAddTextDiv.appendChild(toDoAddText);
           toDoAdd.appendChild(toDoAddTextDiv);
-          toDosDiv.appendChild(toDoAdd);
+          toDosDiv.insertAdjacentElement('afterbegin',toDoAdd);
+
           projectDivAll.appendChild(toDosDiv);
 
           projectMainContainer.appendChild(projectDivAll);
@@ -845,7 +875,7 @@ function editToDo(project,toDo) {
         projectShortcutPriorityInstruction.className = 'project-shortcut-priority-instruction';
         projectShortcutPriorityInstruction.innerHTML = 'priority:';
         let projectShortcutPriority = document.createElement('div');
-        projectShortcutPriority.className = 'project-shortcut-time';
+        projectShortcutPriority.className = 'project-shortcut-priority';
         projectShortcutPriority.innerHTML = i.priority;
 
         projectShortcutPriorityDiv.appendChild(projectShortcutPriorityInstruction);
@@ -856,9 +886,9 @@ function editToDo(project,toDo) {
         //Trash bin - delete a project with a click
         let trashBinDiv = document.createElement('div');
         trashBinDiv.className = 'trash-bin-div';
-        let trashBinIcon = document.createElement('div');
-        trashBinIcon.className = 'trash-bin-icon-div';
-        trashBinIcon.innerHTML = `click me to delete this project, id ${i.id}`;
+        let trashBinIcon = document.createElement('img');
+        trashBinIcon.className = 'icon trash-bin-icon-div';
+        trashBinIcon.src = './assets/imgs/icons/delete.png';
 
         trashBinIcon.addEventListener('click',deleteProject.bind(this,i));
 
@@ -877,8 +907,9 @@ function editToDo(project,toDo) {
       //Add a ADD MORE PROJECTS button
       let moreProjectDiv = document.createElement('DIV');
       moreProjectDiv.className = 'more-projects-row';
-      let moreProjectIcon = document.createElement('DIV');
+      let moreProjectIcon = document.createElement('img');
       moreProjectIcon.className = 'more-projects-row-icon';
+      moreProjectIcon.src = './assets/imgs/icons/plus.png';
       let moreProjectText = document.createElement('DIV');
       moreProjectText.className = 'more-projects-row-text';
       moreProjectText.innerHTML = 'ADD MORE PROJECTS';

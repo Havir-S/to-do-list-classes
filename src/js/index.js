@@ -39,7 +39,10 @@ const checkForStorage = () => {
     var loadedProjectsArray = Array.from(JSON.parse(localStorage.getItem('projectsArray')));
     //Since i can't go around putting Objects into localStorage, i guess i'll have to make new Projects from them.
     for (var i = 0; i < loadedProjectsArray.length; i++) {
-      let newProject = new Project(loadedProjectsArray[i]._title,loadedProjectsArray[i]._description,loadedProjectsArray[i]._dueDate,loadedProjectsArray[i]._id);
+      let newProject = new Project(loadedProjectsArray[i]._title,
+                                   loadedProjectsArray[i]._description,
+                                   loadedProjectsArray[i]._dueDate,
+                                   loadedProjectsArray[i]._id);
       let arrayOfToDos = Array.from(loadedProjectsArray[i]._toDos);
 
       for (var j of arrayOfToDos) {
@@ -86,7 +89,8 @@ function projectHandler(project) {
   //if project is false - we are making a new project
 
       if(titleInput.value && descriptionInput.value && dateInput.value && priorityInput.value) {
-        let newProject = new Project(titleInput.value,descriptionInput.value,dateInput.value,priorityInput.value);
+        let newProject = new Project(titleInput.value,descriptionInput.value,
+                                     dateInput.value,priorityInput.value);
         projectsArray.push(newProject);
         DOMStuff.createProjectNamesDiv(projectsArray);
       } else {
@@ -104,27 +108,33 @@ function toDoHandler(x,y) {
   let titleInput = document.querySelector('input[name="todo-title"]'),
       descriptionInput = document.querySelector(`input[name='todo-description']`),
       priorityInput = document.querySelector(`input[name='todo-priority']`),
-      choosenIcon = document.querySelector('.icon-container-img-checked').src;
-      console.log(choosenIcon);
+      choosenIcon = document.querySelector('.icon-container-img-checked');
   if (y) {
     //IN THIS CASE ==================== X IS EQUAL TO THE PROJECT, THE TODO WILL BE ASSIGNED TO it
     // IF Y is true, then we are EDITING A TODO. Y == toDo
     x.toDos[x.toDos.indexOf(y)].title = titleInput.value;
     x.toDos[x.toDos.indexOf(y)].description = descriptionInput.value;
     x.toDos[x.toDos.indexOf(y)].priority = priorityInput.value;
-    x.toDos[x.toDos.indexOf(y)].icon = choosenIcon;
+    x.toDos[x.toDos.indexOf(y)].icon = choosenIcon.src;
     DOMStuff.renderProjectMain(x);
 
   } else {
     //IF Y IS FALSE, THEN WE ARE MAKING A NEW ONE
 
         if (titleInput.value && descriptionInput.value && priorityInput.value) {
-          if (!choosenIcon) {
+          if (choosenIcon) {
+            let newToDo = new toDoClass(titleInput.value,descriptionInput.value,
+                                        priorityInput.value,choosenIcon.src);
+            x.addToDo(newToDo);
+            DOMStuff.renderProjectMain(x);
+          } else {
             choosenIcon = './assets/imgs/icons/notification.png';
+            let newToDo = new toDoClass(titleInput.value,descriptionInput.value,
+                                        priorityInput.value,choosenIcon);
+            x.addToDo(newToDo);
+            DOMStuff.renderProjectMain(x);
           }
-          let newToDo = new toDoClass(titleInput.value,descriptionInput.value,priorityInput.value,choosenIcon);
-          x.addToDo(newToDo);
-          DOMStuff.renderProjectMain(x);
+
         } else {
           console.error('You need to fill all the fields in order to create a toDo');
         }
@@ -134,5 +144,6 @@ function toDoHandler(x,y) {
 
 checkForStorage();
 
-export {projectsArray,resetValue,projectHandler,toDoHandler,saveToLocalStorage,projectsIdLocalStorageSetup};
+export {projectsArray,resetValue,projectHandler,toDoHandler,
+        saveToLocalStorage,projectsIdLocalStorageSetup};
 export default projectsArray;

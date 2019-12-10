@@ -2,7 +2,6 @@
 import toDoClass from './toDos.js';
 import { format, isDate, formatDistanceToNow } from 'date-fns';
 import {projectsIdLocalStorageSetup} from './index.js';
-// console.log(loadedIdArray,loadedIdCount);
 
 // Projects are the "main objects".
 
