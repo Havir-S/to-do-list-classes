@@ -1,6 +1,8 @@
 //This is the toDos Creating class.
 import toDoClass from './toDos.js';
 import { format, isDate, formatDistanceToNow } from 'date-fns';
+import {projectsIdLocalStorageSetup} from './index.js';
+// console.log(loadedIdArray,loadedIdCount);
 
 // Projects are the "main objects".
 
@@ -16,6 +18,7 @@ import { format, isDate, formatDistanceToNow } from 'date-fns';
 let projectIdCount = 1;
 //Id array with all the ids that can be reused after Project being deleted or completed
 let arrayOfProjectIdToBeAssignedAfterDeletingItems = [];
+
 //ID ASSIGNING FUNCTION
 const assignProjectId = () => {
   //we have no need to reuse deleted ids, make a new one
@@ -84,18 +87,15 @@ class Project {
   }
   addToDo(value) {
     if (value instanceof toDoClass) {
-      this._toDos.unshift(value);
+      this._toDos.push(value);
     } else {
     }
 
   }
   deleteToDo(value) {
     if (this._toDos.indexOf(value) > -1) {
-      console.log(`There is no toDo like ${value}. Currently, array looks like this ${this._toDos}`);
       this._toDos.splice(this._toDos.indexOf(value,1));
-      console.log(`Now the array looks like this ${this._toDos}`);
     } else {
-      console.log(`There is no toDo like ${value}`);
       return;
     }
   }
@@ -111,6 +111,10 @@ class Project {
   }
 }
 
+//Failure of a function
+// setTimeout(projectsIdLocalStorageSetup(arrayOfProjectIdToBeAssignedAfterDeletingItems,projectIdCount),2000);
+// projectsIdLocalStorageSetup(arrayOfProjectIdToBeAssignedAfterDeletingItems,projectIdCount);
 
 
+export {arrayOfProjectIdToBeAssignedAfterDeletingItems, Project, projectIdCount};
 export default Project;

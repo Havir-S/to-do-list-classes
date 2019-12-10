@@ -68,6 +68,27 @@ input[type='range'] {
   }
 }
 
+.icons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  border: 2px solid brown;
+  .icon-container-img {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+  }
+}
+.icon-container-img {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  // filter: blur(10px);
+}
+.icon-container-img-checked {
+  border: 2px solid blue;
+}
 // modals
 
 

@@ -1,5 +1,5 @@
 import Project from './Projects.js';
-import {projectsArray,resetValue,projectHandler,toDoHandler} from './index.js';
+import {projectsArray,resetValue,projectHandler,toDoHandler,saveToLocalStorage} from './index.js';
 //DOM stuff is here
 
 //Create a row for a project
@@ -7,7 +7,15 @@ import {projectsArray,resetValue,projectHandler,toDoHandler} from './index.js';
 //HOW DOES IT WORK
 //1. You have to assign 2 variables, projectMainContainer for the project and it's toDos, and projectNamesContainer for all projects. They will also serve as a shortcut to its toDos.
 //2. Then You have a part that creates a "CREATOR/EDITOR" of Projects and ToDos.
+//3. You also have 2 functions that create modals, that pop up whenever you click on "Add Project" or "Add toDo" or edit any of these.
 const DOMStuff = (function() {
+
+  //icons ending
+  let iconsNamesArray = ['airplane.png','box.png','cake.png','calculator.png','car.png','coffee-cup.png','dish.png','dog.png','drop.png','error.png','finish-flag.png','finish-line.png',
+                    'fire.png','flag.png','forever.png','gift.png','group.png','headset.png','home.png','homework.png','loop-arrow.png','maintenance.png','management.png',
+                    'map.png','map2.png','maps-and-flags.png','mountains.png','musical-note.png','notification.png','paper.png','paw-print-.png','pending.png','pond.png','priority.png',
+                    'promotion.png','sea.png','settings.png','settings2.png','settings3.png','shop.png','start.png','startup.png','suitcase.png','team.png','technics.png','test.png',
+                    'tools.png','users.png','visibility.png','winner.png','wrench.png'];
 
   //Node to store project names
   let projectNamesContainer;
@@ -46,13 +54,18 @@ const DOMStuff = (function() {
     }
   }
 
+  const removeClass = ([...nodes],clas) => {
+    for (var i of nodes) {
+      i.classList.remove(clas);
+    }
+  }
+
   // ======================================================================================
   // SPAWNER OF "MENU TO CREATE TODOS"
   // ======================================================================================
   //Main problem - I could have just simply put if statements based on provided information.
   //If we provide a toDo, and it already has value = fill the input with it.
 const createToDoMenuSpawner = (x,project,toDo) => {
-  console.log(x,project,toDo);
   if (x) {
     //IF WE GET A TODO - WE SPAWN ONE WITH ITS DATA TO BE EDITED
 
@@ -117,6 +130,35 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
     toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
     toDoEditContainer.appendChild(toDoEditRowPriority);
+
+    //icons
+    let toDoIconsContainer = document.createElement('div');
+    toDoIconsContainer.className = 'icons-container';
+    let toDoIconsLabel = document.createElement('div');
+    toDoIconsLabel.className = 'icons-label';
+    toDoIconsContainer.appendChild(toDoIconsLabel);
+    let toDoIconsGrid = document.createElement('div');
+    toDoIconsGrid.className = 'icons-grid';
+    for( var i of iconsNamesArray) {
+      let iconImg = document.createElement('img');
+      iconImg.className = 'icon-container-img';
+      iconImg.src = `./assets/imgs/icons/${i}`;
+      iconImg.alt = 'icon';
+      toDoIconsGrid.appendChild(iconImg);
+
+      if (iconImg.src == toDo.icon) {
+        iconImg.className = 'icon-container-img icon-container-img-checked';
+      }
+
+      iconImg.addEventListener('click', function(e) {
+        //making sure there is only one item with that class
+        removeClass(document.querySelectorAll('.icon-container-img'),'icon-container-img-checked');
+        this.classList.add('icon-container-img-checked');
+      })
+    }
+    toDoIconsContainer.appendChild(toDoIconsGrid);
+    toDoEditContainer.appendChild(toDoIconsContainer);
+
 
     //buttons
     let buttonsDiv = document.createElement('div');
@@ -188,22 +230,6 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoEditRowDescription.appendChild(toDoEditRowDescriptionInput);
     toDoEditContainer.appendChild(toDoEditRowDescription);
 
-    //date label and input
-    // let toDoEditRowDate = document.createElement('div');
-    // toDoEditRowDate.className = 'create-project-row create-project-row-date';
-    // let toDoEditRowDateLabel = document.createElement('label');
-    // toDoEditRowDateLabel.className = 'create-project-row-date-label';
-    // toDoEditRowDateLabel.setAttribute('for','project-date');
-    // toDoEditRowDateLabel.innerHTML = 'Project Date:';
-    // let toDoEditRowDateInput = document.createElement('input');
-    // toDoEditRowDateInput.className = 'create-project-row-date-input';
-    // toDoEditRowDateInput.type = 'date';
-    // toDoEditRowDateInput.name = 'project-date';
-    //
-    // toDoEditRowDate.appendChild(toDoEditRowDateLabel);
-    // toDoEditRowDate.appendChild(toDoEditRowDateInput);
-    // toDoEditContainer.appendChild(toDoEditRowDate);
-
     //priority label and input
     let toDoEditRowPriority = document.createElement('div');
     toDoEditRowPriority.className = 'create-todo-row create-todo-row-priority';
@@ -222,6 +248,32 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
     toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
     toDoEditContainer.appendChild(toDoEditRowPriority);
+
+    //icons
+    let toDoIconsContainer = document.createElement('div');
+    toDoIconsContainer.className = 'icons-container';
+    let toDoIconsLabel = document.createElement('div');
+    toDoIconsLabel.className = 'icons-label';
+    toDoIconsContainer.appendChild(toDoIconsLabel);
+    let toDoIconsGrid = document.createElement('div');
+    toDoIconsGrid.className = 'icons-grid';
+    for( var i of iconsNamesArray) {
+      let iconImg = document.createElement('img');
+      iconImg.className = 'icon-container-img';
+      iconImg.src = `./assets/imgs/icons/${i}`;
+      iconImg.alt = 'icon';
+      toDoIconsGrid.appendChild(iconImg);
+
+      iconImg.addEventListener('click', function(e) {
+        //making sure there is only one item with that class
+        removeClass(document.querySelectorAll('.icon-container-img'),'icon-container-img-checked');
+        this.classList.add('icon-container-img-checked');
+      })
+    }
+
+    toDoIconsContainer.appendChild(toDoIconsGrid);
+
+    toDoEditContainer.appendChild(toDoIconsContainer);
 
     //buttons
     let buttonsDiv = document.createElement('div');
@@ -260,7 +312,6 @@ const createProjectMenuSpawner = (project) => {
 
   if (project) {
     //IF WE GET A PROJECT - WE SPAWN ONE WITH ITS DATA TO BE EDITED
-    console.log(project);
     if (projectsArray.includes(project)) {
 
 
@@ -492,6 +543,7 @@ function deleteToDo(project,toDo) {
   //if a project does include provided toDo, it deletes it.
   if (project.toDos.includes(toDo)) {
     project.toDos.splice(project.toDos.indexOf(toDo),1);
+    saveToLocalStorage(projectsArray);
     renderProjectMain(project);
   }else {
     console.error('Project does not include that toDo');
@@ -509,8 +561,6 @@ function editToDo(project,toDo) {
   //CREATION OF A toDo ROW ===============================================================================================================================
   //A small management mistake, should have gone for only 2 arguments
   const createToDoRow = ([...toDos],nodeToAppend,project) => {
-    console.log(toDos);
-    console.log(nodeToAppend);
     for (var i of toDos) {
       //main DIV
       let mainToDoRow = document.createElement('div');
@@ -525,8 +575,9 @@ function editToDo(project,toDo) {
       //TO DO ICON
       let toDoIconDiv = document.createElement('div');
       toDoIconDiv.className = 'to-do-icon-div';
-      let toDoIcon = document.createElement('div');
+      let toDoIcon = document.createElement('img');
       toDoIcon.className = 'to-do-icon';
+      toDoIcon.src = `${i.icon}`;
       toDoIcon.innerHTML = 'toDo icon';
 
       toDoIconDiv.appendChild(toDoIcon);
@@ -739,6 +790,7 @@ function editToDo(project,toDo) {
     if (projectsArray.includes(project)) {
       project.idToArray;
       projectsArray.splice(projectsArray.indexOf(project),1);
+      saveToLocalStorage(projectsArray);
       createProjectNamesDiv(projectsArray);
     }
     //Stopping Immediate Propagation in order to not render a project in the main div. (Because the main event of a Project Shortcut, is to spawn one)

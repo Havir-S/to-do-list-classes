@@ -11,21 +11,16 @@
 
 //Function invoked when we delete a toDo from a list
 
-//Date check
-function checkDate(x) {
-  x += 'DateCheck';
-  return x;
-}
 
 
 //Main class for toDo objects
 class toDoClass {
-  constructor(title,description,priority) {
+  constructor(title,description,priority,icon) {
     this._title = title;
     this._description = description;
     // this._dueDate = dueDate;
     this._priority = priority;
-    // this._id = assignId();
+    this._icon = icon;
   }
   get title() {
     return this._title;
@@ -50,6 +45,12 @@ class toDoClass {
   }
   set priority(value) {
     this._priority = value;
+  }
+  get icon() {
+    return this._icon;
+  }
+  set icon(value) {
+    this._icon = value;
   }
 
 }

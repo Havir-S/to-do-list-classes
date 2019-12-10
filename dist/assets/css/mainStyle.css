@@ -49,6 +49,29 @@
   border: 1px solid pink;
 }
 
+.icons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  border: 2px solid brown;
+}
+.icons-grid .icon-container-img {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.icon-container-img {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.icon-container-img-checked {
+  border: 2px solid blue;
+}
+
 .create-project-modal {
   position: absolute;
   top: 0;
