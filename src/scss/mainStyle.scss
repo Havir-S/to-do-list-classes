@@ -89,8 +89,8 @@ body {
   //PROJECT NAMES ======================================================================
   main {
   .projects-container {
+    display: inline-block;
     width: 350px;
-    float:left;
     margin: 34.5px 3px 10px 15px;
     transition: all .1s;
     h3 {
@@ -261,7 +261,7 @@ body {
     margin-top: 60px;
     background: linear-gradient(to bottom, #404040 0%,#262626 100%);
     box-shadow: 0 0 3px 0 #888888 inset, 0 0 0 0 rgba(0,255,0,.4);
-    float: left;
+    display: inline-block;
     width: 100%;
     max-width: 600px;
     height: 800px;
@@ -346,6 +346,8 @@ body {
           cursor:pointer;
           .more-details-arrow {
             transition: all .7s ease-in-out;
+            filter: invert(56%) sepia(97%) saturate(604%) hue-rotate(359deg) brightness(101%) contrast(106%);
+
           }
         }
         .project-more-details-container-checked {
@@ -453,6 +455,8 @@ body {
             .to-do-icon-div {
 
               .to-do-icon {
+                width: 35px;
+                height: 35px;
 
               }
             }
@@ -592,7 +596,9 @@ body {
       margin: 10px auto 0;
       display: flex;
       flex-wrap: wrap;
-      border: 5px solid yellow;
+      border: 3px solid yellow;
+      border-radius: 3px;
+      background: rgba(150,150,150,.4);
       .icon-container-img {
         width: 40px;
         height: 40px;
