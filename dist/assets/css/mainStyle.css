@@ -52,8 +52,50 @@ table {
   border-spacing: 0;
 }
 
+@keyframes slideDownAnimation {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 80px;
+  }
+}
 * {
   box-sizing: border-box;
+}
+
+input[type=range] {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #d2d2d2;
+  border-radius: 10px;
+}
+input[type=range]:active {
+  outline: 0;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 15px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: green;
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+input[type=range]::after {
+  content: attr(data-value);
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: calc(100% + 10px);
+  min-width: 25px;
+  color: green;
+  font-size: 20px;
 }
 
 body {
@@ -88,7 +130,7 @@ body {
 }
 
 .container::-webkit-scrollbar {
-  width: 16px;
+  width: 11px;
 }
 
 .wrapper main .projects-container {
@@ -147,10 +189,13 @@ body {
   justify-self: stretch;
   margin-bottom: 5px;
   transition: all 0.3s;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .wrapper main .projects-container .names-container .project-shortcut-row:hover .project-shortcut-name {
   border-bottom: 1px double rgba(200, 200, 200, 0.8);
   border-radius: 0 0 3% 3%;
+  box-shadow: 0 0 3px 4px rgba(0, 0, 0, 0.5);
 }
 .wrapper main .projects-container .names-container .project-shortcut-row .project-shortcut-time-div {
   height: 100%;
@@ -262,6 +307,9 @@ body {
   justify-items: center;
   align-content: center;
   text-align: center;
+  border-bottom: 1px solid rgba(200, 200, 200, 0.6);
+  padding-bottom: 5px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 .wrapper main .container .project-main .project-div-shortcut .project-name-container {
   min-height: 50px;
@@ -269,12 +317,23 @@ body {
   text-align: left;
   font-size: 35px;
   border-bottom: 1px solid rgba(200, 200, 200, 0.6);
-  border-radius: 0 0 7% 7%;
+  border-right: 1px solid rgba(200, 200, 200, 0.6);
+  border-radius: 0 0 7% 0;
   padding: 12px 12px;
   grid-area: 1/1/1/7;
   justify-self: stretch;
   margin-bottom: 5px;
   transition: all 0.3s;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.wrapper main .container .project-main .project-div-shortcut .project-edit {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wrapper main .container .project-main .project-div-shortcut .project-edit:hover {
+  filter: drop-shadow(0 0 3px black);
+  transform: scale(1.1);
 }
 .wrapper main .container .project-main .project-div-shortcut .project-time-container {
   grid-area: 2/1/3/3;
@@ -282,43 +341,127 @@ body {
 .wrapper main .container .project-main .project-div-shortcut .project-priority-container {
   grid-area: 2/3/3/5;
 }
+.wrapper main .container .project-main .project-div-shortcut .project-more-details-container {
+  cursor: pointer;
+}
+.wrapper main .container .project-main .project-div-shortcut .project-more-details-container .more-details-arrow {
+  transition: all 0.7s ease-in-out;
+}
+.wrapper main .container .project-main .project-div-shortcut .project-more-details-container-checked {
+  transform: rotate(540deg);
+  transition: all 0.7s;
+}
 .wrapper main .container .project-main .project-more-details {
-  border: 2px solid pink;
-  height: 30px;
+  border-bottom: 2px solid rgba(200, 200, 200, 0.6);
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  animation: slideDownAnimation 0.3s ease-in forwards;
+}
+.wrapper main .container .project-main .project-more-details .more-details-text {
+  padding: 10px;
+}
+.wrapper main .container .project-main .to-do-container {
+  margin: 5px 0;
 }
 .wrapper main .container .project-main .to-do-container .to-do-row, .wrapper main .container .project-main .to-do-container .to-do-add-div {
   border-left: 5px solid rgba(0, 255, 0, 0.7);
 }
+.wrapper main .container .project-main .to-do-container .to-do-add-div {
+  border-color: darkorange;
+  border-bottom: 1px solid darkorange;
+  border-top: 1px solid darkorange;
+  text-align: center;
+  position: relative;
+  height: 60px;
+  line-height: 58px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.5s all;
+  overflow: hidden;
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div::before {
+  content: "";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -200%;
+  left: -225%;
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+  background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div:hover::before {
+  top: 200%;
+  left: 200%;
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div .to-do-add-icon {
+  position: absolute;
+  top: 50%;
+  left: 35px;
+  transform: translate(0, -50%);
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div .to-do-add-text-div {
+  transition: 0.1s all;
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div .to-do-add-text-div .to-do-add-text {
+  display: inline-block;
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div:hover {
+  font-size: 19px;
+}
+.wrapper main .container .project-main .to-do-container .to-do-add-div:hover .to-do-add-text-div {
+  box-shadow: 0 0 5px 5px #88888822;
+}
 .wrapper main .container .project-main .to-do-container .to-do-row {
-  border: 2px solid rgba(0, 255, 0, 0.7);
-  margin: 15px 0;
+  background: rgba(200, 200, 200, 0.2);
+  margin: 10px 0;
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 2px solid rgba(200, 200, 200, 0.6);
+  border-top: 2px solid rgba(200, 200, 200, 0.6);
+  box-shadow: 0 3px 0 2px rgba(0, 0, 0, 0.2);
+  background: rgba(200, 200, 200, 0.2);
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div .to-do-title-div {
+  grid-area: 1/2/1/7;
+  justify-self: start;
+  text-transform: capitalize;
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div .to-do-title-div .to-do-title-text {
+  font-size: 15px;
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div .to-do-edit-div {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div .to-do-edit-div:hover {
+  filter: drop-shadow(0 0 3px black);
+  transform: scale(1.1);
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div .to-do-delete-div {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wrapper main .container .project-main .to-do-container .to-do-row .to-information-div .to-do-delete-div:hover {
+  filter: drop-shadow(0 0 3px black);
+  transform: scale(1.1);
 }
 .wrapper main .container .project-main .to-do-container .to-do-row .to-do-description-div {
-  border: 1px solid pink;
+  border-bottom: 2px solid rgba(200, 200, 200, 0.6);
+  padding: 10px;
+  min-height: 100px;
 }
-.icons-grid {
-  display: flex;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: auto;
-  border: 2px solid brown;
-}
-.icons-grid .icon-container-img {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-}
-
-.icon-container-img {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-}
-
-.icon-container-img-checked {
-  border: 2px solid blue;
-}
-
 .icon {
   filter: invert(100%) sepia(91%) saturate(38%) hue-rotate(321deg) brightness(110%) contrast(110%);
 }
@@ -333,23 +476,104 @@ body {
   background: rgba(0, 0, 0, 0.8);
   color: white;
 }
+.create-project-modal label {
+  color: green;
+  display: block;
+  margin: 11px 0 2px;
+  font-size: 19px;
+}
+.create-project-modal input[type=text] {
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 17px;
+  width: 200px;
+  background: transparent;
+  border: 2px solid 255, 255, 255, 0.7;
+  caret-color: white;
+  color: white;
+  transition: all 0.2s;
+  transition: width 1s;
+  border-radius: 5px;
+}
+.create-project-modal input[type=text]:active {
+  outline: 0;
+}
+.create-project-modal input[type=text]:focus {
+  outline: 0;
+  width: 100%;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) inset;
+  background: rgba(100, 100, 100, 0.3);
+}
 .create-project-modal .create-project-container {
   background: url("../imgs/hexabump.png");
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 600px;
-  height: 800px;
+  width: 500px;
+  height: 500px;
   transform: translate(-50%, -50%);
   border: 2px solid green;
   padding: 15px;
 }
-.create-project-modal .create-project-container * {
-  margin: 15px 0;
+.create-project-modal .create-project-container .h3-modal-title {
+  text-align: center;
+  font-size: 25px;
+  font-family: "Coda Caption", sans-serif;
 }
-.create-project-modal .create-project-container .create-project-row label {
-  color: red;
-  display: block;
+.create-project-modal .create-project-container * {
+  margin: 6px 0;
+}
+.create-project-modal .create-todo-container {
+  height: 800px;
+}
+.create-project-modal .create-todo-container .icons-grid {
+  margin: 10px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  border: 5px solid yellow;
+}
+.create-project-modal .create-todo-container .icons-grid .icon-container-img {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  padding: 3px;
+  cursor: pointer;
+  margin: 5px;
+}
+.create-project-modal .create-todo-container .icons-grid .icon-container-img-checked {
+  border: 2px solid blue;
+}
+.create-project-modal .buttons-div {
+  text-align: center;
+}
+.create-project-modal .buttons-div .buttons {
+  -webkit-appearance: button;
+  background-image: linear-gradient(to bottom, #b7b7b7, #838383);
+  border: 1px solid transparent;
+  user-select: none;
+  background-repeat: repeat-x;
+  border-color: #818181;
+  border-top-color: #d4d4d4;
+  border-style: solid;
+  color: #333333;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+  padding: 5px 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 3px;
+  margin: 15px 5px;
+  cursor: pointer;
+}
+.create-project-modal .buttons-div .buttons:hover {
+  background-color: #9e9e9e;
+  background-image: linear-gradient(to top, #b7b7b7, #838383);
+  border: 1px solid #9e9e9e;
+}
+.create-project-modal .buttons-div .buttons:focus {
+  outline: none;
 }
 
 /*# sourceMappingURL=mainStyle.css.map */

@@ -91,7 +91,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     let toDoEditRowTitleLabel = document.createElement('label');
     toDoEditRowTitleLabel.className = 'create-todo-row-title-label';
     toDoEditRowTitleLabel.setAttribute('for','todo-title');
-    toDoEditRowTitleLabel.innerHTML = 'todo name:';
+    toDoEditRowTitleLabel.innerHTML = 'Todo name:';
     let toDoEditRowTitleInput = document.createElement('input');
     toDoEditRowTitleInput.className = 'create-todo-row-title-input';
     toDoEditRowTitleInput.type = 'text';
@@ -108,7 +108,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     let toDoEditRowDescriptionLabel = document.createElement('label');
     toDoEditRowDescriptionLabel.className = 'create-todo-row-description-label';
     toDoEditRowDescriptionLabel.setAttribute('for','todo-description');
-    toDoEditRowDescriptionLabel.innerHTML = 'todo description:';
+    toDoEditRowDescriptionLabel.innerHTML = 'Todo description:';
     let toDoEditRowDescriptionInput = document.createElement('input');
     toDoEditRowDescriptionInput.className = 'create-todo-row-description-input';
     toDoEditRowDescriptionInput.type = 'text';
@@ -125,7 +125,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     let toDoEditRowPriorityLabel = document.createElement('label');
     toDoEditRowPriorityLabel.className = 'create-todo-row-priority-label';
     toDoEditRowPriorityLabel.setAttribute('for','todo-priority');
-    toDoEditRowPriorityLabel.innerHTML = 'todo Priority:';
+    toDoEditRowPriorityLabel.innerHTML = 'Todo Priority:';
     let toDoEditRowPriorityInput = document.createElement('input');
     toDoEditRowPriorityInput.className = 'create-todo-row-priority-input';
     toDoEditRowPriorityInput.type = 'range';
@@ -133,6 +133,11 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoEditRowPriorityInput.max = '10';
     toDoEditRowPriorityInput.name = 'todo-priority';
     toDoEditRowPriorityInput.value = toDo.priority;
+    toDoEditRowPriorityInput.setAttribute('data-value', "5");
+
+    toDoEditRowPriorityInput.addEventListener('input', function() {
+      event.target.setAttribute('data-value',toDoEditRowPriorityInput.value);
+    })
 
     toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
     toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
@@ -141,8 +146,9 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     //icons
     let toDoIconsContainer = document.createElement('div');
     toDoIconsContainer.className = 'icons-container';
-    let toDoIconsLabel = document.createElement('div');
+    let toDoIconsLabel = document.createElement('label');
     toDoIconsLabel.className = 'icons-label';
+    toDoIconsLabel.innerHTML = 'Todos Icon :';
     toDoIconsContainer.appendChild(toDoIconsLabel);
     let toDoIconsGrid = document.createElement('div');
     toDoIconsGrid.className = 'icons-grid';
@@ -257,6 +263,11 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     toDoEditRowPriorityInput.max = '10';
     toDoEditRowPriorityInput.value = '5';
     toDoEditRowPriorityInput.name = 'todo-priority';
+    toDoEditRowPriorityInput.setAttribute('data-value', "5");
+
+    toDoEditRowPriorityInput.addEventListener('input', function() {
+      event.target.setAttribute('data-value',toDoEditRowPriorityInput.value);
+    })
 
     toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
     toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
@@ -265,8 +276,9 @@ const createToDoMenuSpawner = (x,project,toDo) => {
     //icons
     let toDoIconsContainer = document.createElement('div');
     toDoIconsContainer.className = 'icons-container';
-    let toDoIconsLabel = document.createElement('div');
+    let toDoIconsLabel = document.createElement('label');
     toDoIconsLabel.className = 'icons-label';
+    toDoIconsLabel.innerHTML = 'Todos Icon :';
     toDoIconsContainer.appendChild(toDoIconsLabel);
     let toDoIconsGrid = document.createElement('div');
     toDoIconsGrid.className = 'icons-grid';
@@ -408,6 +420,11 @@ const createProjectMenuSpawner = (project) => {
       projectEditRowPriorityInput.max = '10';
       projectEditRowPriorityInput.value = project.priority;
       projectEditRowPriorityInput.name = 'project-priority';
+      projectEditRowPriorityInput.setAttribute('data-value', "5");
+
+      projectEditRowPriorityInput.addEventListener('input', function() {
+        event.target.setAttribute('data-value',projectEditRowPriorityInput.value);
+      })
 
       projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
       projectEditRowPriority.appendChild(projectEditRowPriorityInput);
@@ -527,6 +544,11 @@ const createProjectMenuSpawner = (project) => {
     projectEditRowPriorityInput.max = '10';
     projectEditRowPriorityInput.value = '5';
     projectEditRowPriorityInput.name = 'project-priority';
+    projectEditRowPriorityInput.setAttribute('data-value', "5");
+
+    projectEditRowPriorityInput.addEventListener('input', function() {
+      event.target.setAttribute('data-value',projectEditRowPriorityInput.value);
+    })
 
     projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
     projectEditRowPriority.appendChild(projectEditRowPriorityInput);
@@ -753,6 +775,10 @@ function editToDo(project,toDo) {
           projectMoreDetailsArrow.src = './assets/imgs/icons/arrow.png';
           projectMoreDetails.appendChild(projectMoreDetailsArrow);
           projectMoreDetailsArrow.addEventListener("click", showMoreDetails);
+
+          projectMoreDetails.addEventListener('click',function(e) {
+            projectMoreDetailsArrow.classList.toggle('project-more-details-container-checked');
+          })
 
           projectDiv.appendChild(projectName);
           projectDiv.appendChild(projectEdit);

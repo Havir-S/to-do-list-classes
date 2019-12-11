@@ -1,0 +1,13 @@
+
+@mixin slideDown($time) {
+  animation: slideDownAnimation $time ease-in forwards;
+}
+
+@keyframes slideDownAnimation {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 80px;
+  }
+}
