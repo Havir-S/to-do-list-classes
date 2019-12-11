@@ -10,11 +10,11 @@ gulp.task('styles', function () {
             overrideBrowserslist: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('./dist/assets/'))
 });
 
 gulp.task('minify-css', function() {
-  return gulp.src('./dist/assets/css/mainStyle.css')
+  return gulp.src('./dist/assets/mainStyle.css')
     .pipe(minifyCss())
-    .pipe(gulp.dest('./dist/assets/css/mainStyle.css'));
+    .pipe(gulp.dest('dist'));
 });
