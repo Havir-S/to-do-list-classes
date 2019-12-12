@@ -1,5 +1,4 @@
 import {arrayOfProjectIdToBeAssignedAfterDeletingItems, Project, projectIdCount} from './Projects.js';
-import { format, isDate, formatDistanceToNow } from 'date-fns';
 import DOMStuff from './DOM.js';
 import toDoClass from './toDos.js';
 
@@ -56,7 +55,7 @@ const checkForStorage = () => {
     DOMStuff.createProjectNamesDiv(projectsArray);
   } else {
   }
- }
+};
 
  function projectsIdLocalStorageSetup(idArray, idCounter) {
    if (localStorage.getItem('idArray')) {
@@ -83,7 +82,7 @@ function projectHandler(project) {
     projectsArray[projectsArray.indexOf(project)].priority = priorityInput.value;
     DOMStuff.createProjectNamesDiv(projectsArray);
     DOMStuff.renderProjectMain(projectsArray[projectsArray.indexOf(project)]);
-    projectsArray[projectsArray.indexOf(project)]
+    projectsArray[projectsArray.indexOf(project)];
 
   } else {
   //if project is false - we are making a new project

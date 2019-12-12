@@ -30,7 +30,7 @@ const DOMStuff = (function() {
     } else {
       console.error('You need to provide a NODE element');
     }
-  }
+  };
 
   // Assigning where the Main content has to appear when Project gets selected.
   const assignProjectMainContainer = (value) => {
@@ -39,7 +39,7 @@ const DOMStuff = (function() {
     } else {
       console.error('You need to provide a NODE element');
     }
-  }
+  };
 
 
   //Deletes all children of the provided node
@@ -52,13 +52,13 @@ const DOMStuff = (function() {
       console.error('Argument has to be a NODE Element');
       return;
     }
-  }
+  };
 
   const removeClass = ([...nodes],clas) => {
     for (var i of nodes) {
       i.classList.remove(clas);
     }
-  }
+  };
 
   // ======================================================================================
   // SPAWNER OF "MENU TO CREATE TODOS"
@@ -137,7 +137,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
 
     toDoEditRowPriorityInput.addEventListener('input', function() {
       event.target.setAttribute('data-value',toDoEditRowPriorityInput.value);
-    })
+    });
 
     toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
     toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
@@ -167,7 +167,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
         //making sure there is only one item with that class
         removeClass(document.querySelectorAll('.icon-container-img'),'icon-container-img-checked');
         this.classList.add('icon-container-img-checked');
-      })
+      });
     }
     toDoIconsContainer.appendChild(toDoIconsGrid);
     toDoEditContainer.appendChild(toDoIconsContainer);
@@ -189,13 +189,13 @@ const createToDoMenuSpawner = (x,project,toDo) => {
 
     buttonRight.addEventListener('click',function() {
       toDoEditModal.parentNode.removeChild(toDoEditModal);
-    })
+    });
 
     buttonLeft.addEventListener('click',function() {
       toDoHandler(project,toDo);
       resetValue(toDoEditModal);
       toDoEditModal.parentNode.removeChild(toDoEditModal);
-    })
+    });
 
     document.body.appendChild(toDoEditModal);
 
@@ -267,7 +267,7 @@ const createToDoMenuSpawner = (x,project,toDo) => {
 
     toDoEditRowPriorityInput.addEventListener('input', function() {
       event.target.setAttribute('data-value',toDoEditRowPriorityInput.value);
-    })
+    });
 
     toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
     toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
@@ -293,11 +293,10 @@ const createToDoMenuSpawner = (x,project,toDo) => {
         //making sure there is only one item with that class
         removeClass(document.querySelectorAll('.icon-container-img'),'icon-container-img-checked');
         this.classList.add('icon-container-img-checked');
-      })
+      });
     }
 
     toDoIconsContainer.appendChild(toDoIconsGrid);
-
     toDoEditContainer.appendChild(toDoIconsContainer);
 
     //buttons
@@ -316,18 +315,18 @@ const createToDoMenuSpawner = (x,project,toDo) => {
 
     buttonRight.addEventListener('click',function() {
       toDoEditModal.parentNode.removeChild(toDoEditModal);
-    })
+    });
 
     buttonLeft.addEventListener('click',function() {
       toDoHandler(project);
       resetValue(toDoEditModal);
       toDoEditModal.parentNode.removeChild(toDoEditModal);
-    })
+    });
 
     document.body.appendChild(toDoEditModal);
 
   }
-}
+};
 
 // ======================================================================================
 // SPAWNER OF "MENU TO CREATE PROJECTS"
@@ -424,7 +423,7 @@ const createProjectMenuSpawner = (project) => {
 
       projectEditRowPriorityInput.addEventListener('input', function() {
         event.target.setAttribute('data-value',projectEditRowPriorityInput.value);
-      })
+      });
 
       projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
       projectEditRowPriority.appendChild(projectEditRowPriorityInput);
@@ -448,18 +447,16 @@ const createProjectMenuSpawner = (project) => {
       buttonRight.addEventListener('click',function() {
         resetValue(projectEditModal);
         projectEditModal.parentNode.removeChild(projectEditModal);
-      })
+      });
 
       //Create a new project button
       buttonLeft.addEventListener('click',function() {
         projectHandler(project);
         resetValue(projectEditModal);
         projectEditModal.parentNode.removeChild(projectEditModal);
-      })
+      });
 
       document.body.appendChild(projectEditModal);
-
-
 
     }
 
@@ -548,7 +545,7 @@ const createProjectMenuSpawner = (project) => {
 
     projectEditRowPriorityInput.addEventListener('input', function() {
       event.target.setAttribute('data-value',projectEditRowPriorityInput.value);
-    })
+    });
 
     projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
     projectEditRowPriority.appendChild(projectEditRowPriorityInput);
@@ -572,19 +569,19 @@ const createProjectMenuSpawner = (project) => {
     buttonRight.addEventListener('click',function() {
       resetValue(projectEditModal);
       projectEditModal.parentNode.removeChild(projectEditModal);
-    })
+    });
 
     //Create a new project button
     buttonLeft.addEventListener('click',function() {
       projectHandler();
       resetValue(projectEditModal);
       projectEditModal.parentNode.removeChild(projectEditModal);
-    })
+    });
 
     document.body.appendChild(projectEditModal);
 
   }
-}
+};
 
 //delete a TODO
 function deleteToDo(project,toDo) {
@@ -605,7 +602,6 @@ function editToDo(project,toDo) {
   createToDoMenuSpawner(true,project,toDo);
 }
 
-
   //CREATION OF A toDo ROW ===============================================================================================================================
   //A small management mistake, should have gone for only 2 arguments
   const createToDoRow = ([...toDos],nodeToAppend,project) => {
@@ -617,7 +613,6 @@ function editToDo(project,toDo) {
       //this is the first row
       let informationDiv = document.createElement('div');
       informationDiv.className = 'to-information-div';
-
 
 
       //TO DO ICON
@@ -686,7 +681,6 @@ function editToDo(project,toDo) {
 
 
       //ToDo DESCRIPTION - this is the second row
-
       let toDoDescriptionDiv = document.createElement('div');
       toDoDescriptionDiv.className = 'to-do-description-div';
       let toDoDescriptionText = document.createElement('div');
@@ -699,9 +693,7 @@ function editToDo(project,toDo) {
       //adding the entire thing to the project div
       nodeToAppend.appendChild(mainToDoRow);
     }
-  }
-
-
+  };
 
   //Function for the arrows to show more details about a project.
   function showMoreDetails(e) {
@@ -722,7 +714,7 @@ function editToDo(project,toDo) {
 
           //THE Project Name Div creation
           let projectName = document.createElement('div');
-          projectName.classList.add('project-name-container')
+          projectName.classList.add('project-name-container');
           let projectNameSpan = document.createElement('span');
           projectNameSpan.classList.add('project-name-container-span');
           projectNameSpan.innerHTML = project.title;
@@ -778,7 +770,7 @@ function editToDo(project,toDo) {
 
           projectMoreDetails.addEventListener('click',function(e) {
             projectMoreDetailsArrow.classList.toggle('project-more-details-container-checked');
-          })
+          });
 
           projectDiv.appendChild(projectName);
           projectDiv.appendChild(projectEdit);
@@ -821,7 +813,7 @@ function editToDo(project,toDo) {
           //ADDING TODOS
           toDoAdd.addEventListener('click',function() {
             createToDoMenuSpawner(false,project);
-          })
+          });
 
           // create TODOS for every toDo instance in the project todo array.
           createToDoRow(project.toDos,toDosDiv,project);
@@ -838,8 +830,7 @@ function editToDo(project,toDo) {
           console.log('i is NOT an instance of Project, can not do shiet');
         }
     }
-  }
-
+  };
 
   //delete project function
   function deleteProject(project,event) {
@@ -852,10 +843,6 @@ function editToDo(project,toDo) {
     //Stopping Immediate Propagation in order to not render a project in the main div. (Because the main event of a Project Shortcut, is to spawn one)
     event.stopImmediatePropagation();
   }
-
-
-
-
 
   // ============================================================================================================
   // PROJECT NAMES(SHORTCUT) FUNCTION ============================================================================================================================================
@@ -927,8 +914,6 @@ function editToDo(project,toDo) {
         //Adding an event - showing the project in main Project Container.
         projectNameContainer.addEventListener('click',renderProjectMain.bind(this,i));
 
-
-
       }
       //Add a ADD MORE PROJECTS button
       let moreProjectDiv = document.createElement('DIV');
@@ -944,15 +929,14 @@ function editToDo(project,toDo) {
 
       moreProjectDiv.addEventListener('click',function() {
         createProjectMenuSpawner();
-      })
+      });
 
       projectNamesContainer.appendChild(moreProjectDiv);
 
     } else {
       console.error('Div for containing all project names has not been defined');
     }
-
-  }
+  };
 
 //a fast project population function
 const populate = () => {
@@ -970,15 +954,15 @@ const populate = () => {
 
   moreProjectDiv.addEventListener('click',function() {
     createProjectMenuSpawner();
-  })
+  });
 
   projectNamesContainer.appendChild(moreProjectDiv);
 
-}
+};
 
   return {
     assignProjectNameContainer,assignProjectMainContainer,renderProjectMain,deleteAllChildNodes,createProjectNamesDiv,populate
-  }
+  };
 })();
 
 export default DOMStuff;

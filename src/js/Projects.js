@@ -1,7 +1,6 @@
 //This is the toDos Creating class.
 import toDoClass from './toDos.js';
-import { format, isDate, formatDistanceToNow } from 'date-fns';
-import {projectsIdLocalStorageSetup} from './index.js';
+import { formatDistanceToNow } from 'date-fns';
 
 // Projects are the "main objects".
 
@@ -29,12 +28,7 @@ const assignProjectId = () => {
     var missingId = arrayOfProjectIdToBeAssignedAfterDeletingItems.splice(arrayOfProjectIdToBeAssignedAfterDeletingItems.indexOf(Math.min(...arrayOfProjectIdToBeAssignedAfterDeletingItems)),1);
     return missingId;
   }
-}
-
-// GET ICON FOR PROJECT ===============================================================
-function getIcon() {
-  return 'icon';
-}
+};
 
 //Main Project object
 class Project {
