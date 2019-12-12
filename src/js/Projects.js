@@ -1,6 +1,8 @@
 //This is the toDos Creating class.
 import toDoClass from './toDos.js';
-import { formatDistanceToNow } from 'date-fns';
+import {
+  formatDistanceToNow
+} from 'date-fns';
 
 // Projects are the "main objects".
 
@@ -25,14 +27,14 @@ const assignProjectId = () => {
   } else {
     //If after deleting a Project we still have an id unasigned, then use it
     //Sorry for the long variable, thought it's funny so I left it like that
-    var missingId = arrayOfProjectIdToBeAssignedAfterDeletingItems.splice(arrayOfProjectIdToBeAssignedAfterDeletingItems.indexOf(Math.min(...arrayOfProjectIdToBeAssignedAfterDeletingItems)),1);
+    var missingId = arrayOfProjectIdToBeAssignedAfterDeletingItems.splice(arrayOfProjectIdToBeAssignedAfterDeletingItems.indexOf(Math.min(...arrayOfProjectIdToBeAssignedAfterDeletingItems)), 1);
     return missingId;
   }
 };
 
 //Main Project object
 class Project {
-  constructor(title,description,dueDate,priority) {
+  constructor(title, description, dueDate, priority) {
     this._title = title;
     this._description = description;
     this._dueDate = dueDate;
@@ -81,13 +83,12 @@ class Project {
   addToDo(value) {
     if (value instanceof toDoClass) {
       this._toDos.push(value);
-    } else {
-    }
+    } else {}
 
   }
   deleteToDo(value) {
     if (this._toDos.indexOf(value) > -1) {
-      this._toDos.splice(this._toDos.indexOf(value,1));
+      this._toDos.splice(this._toDos.indexOf(value, 1));
     } else {
       return;
     }
@@ -109,5 +110,9 @@ class Project {
 // projectsIdLocalStorageSetup(arrayOfProjectIdToBeAssignedAfterDeletingItems,projectIdCount);
 
 
-export {arrayOfProjectIdToBeAssignedAfterDeletingItems, Project, projectIdCount};
+export {
+  arrayOfProjectIdToBeAssignedAfterDeletingItems,
+  Project,
+  projectIdCount
+};
 export default Project;

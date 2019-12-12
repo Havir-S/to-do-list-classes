@@ -1,5 +1,11 @@
 import Project from './Projects.js';
-import {projectsArray,resetValue,projectHandler,toDoHandler,saveToLocalStorage} from './index.js';
+import {
+  projectsArray,
+  resetValue,
+  projectHandler,
+  toDoHandler,
+  saveToLocalStorage
+} from './index.js';
 //DOM stuff is here
 
 //Create a row for a project
@@ -11,11 +17,12 @@ import {projectsArray,resetValue,projectHandler,toDoHandler,saveToLocalStorage} 
 const DOMStuff = (function() {
 
   //icons ending
-  let iconsNamesArray = ['airplane.png','box.png','cake.png','calculator.png','car.png','coffee-cup.png','dish.png','dog.png','drop.png','error.png','finish-flag.png','finish-line.png',
-                    'fire.png','flag.png','forever.png','gift.png','group.png','headset.png','home.png','homework.png','loop-arrow.png','maintenance.png','management.png',
-                    'map.png','map2.png','maps-and-flags.png','mountains.png','musical-note.png','notification.png','paper.png','paw-print-.png','pending.png','pond.png','priority.png',
-                    'promotion.png','sea.png','settings.png','settings2.png','settings3.png','shop.png','start.png','startup.png','suitcase.png','team.png','technics.png','test.png',
-                    'tools.png','users.png','visibility.png','winner.png','wrench.png'];
+  let iconsNamesArray = ['airplane.png', 'box.png', 'cake.png', 'calculator.png', 'car.png', 'coffee-cup.png', 'dish.png', 'dog.png', 'drop.png', 'error.png', 'finish-flag.png', 'finish-line.png',
+    'fire.png', 'flag.png', 'forever.png', 'gift.png', 'group.png', 'headset.png', 'home.png', 'homework.png', 'loop-arrow.png', 'maintenance.png', 'management.png',
+    'map.png', 'map2.png', 'maps-and-flags.png', 'mountains.png', 'musical-note.png', 'notification.png', 'paper.png', 'paw-print-.png', 'pending.png', 'pond.png', 'priority.png',
+    'promotion.png', 'sea.png', 'settings.png', 'settings2.png', 'settings3.png', 'shop.png', 'start.png', 'startup.png', 'suitcase.png', 'team.png', 'technics.png', 'test.png',
+    'tools.png', 'users.png', 'visibility.png', 'winner.png', 'wrench.png'
+  ];
 
   //Node to store project names
   let projectNamesContainer;
@@ -54,7 +61,7 @@ const DOMStuff = (function() {
     }
   };
 
-  const removeClass = ([...nodes],clas) => {
+  const removeClass = ([...nodes], clas) => {
     for (var i of nodes) {
       i.classList.remove(clas);
     }
@@ -65,280 +72,404 @@ const DOMStuff = (function() {
   // ======================================================================================
   //Main problem - I could have just simply put if statements based on provided information.
   //If we provide a toDo, and it already has value = fill the input with it.
-const createToDoMenuSpawner = (x,project,toDo) => {
-  if (x) {
-    //IF WE GET A TODO - WE SPAWN ONE WITH ITS DATA TO BE EDITED
+  const createToDoMenuSpawner = (x, project, toDo) => {
+    if (x) {
+      //IF WE GET A TODO - WE SPAWN ONE WITH ITS DATA TO BE EDITED
 
-    let toDoEditModal = document.createElement('div');
-    toDoEditModal.className = 'create-project-modal create-todo-modal';
+      let toDoEditModal = document.createElement('div');
+      toDoEditModal.className = 'create-project-modal create-todo-modal';
 
-    //main container
-    let toDoEditContainer = document.createElement('div');
-    toDoEditContainer.className = 'create-project-container create-todo-container';
+      //main container
+      let toDoEditContainer = document.createElement('div');
+      toDoEditContainer.className = 'create-project-container create-todo-container';
 
-    toDoEditModal.appendChild(toDoEditContainer);
+      toDoEditModal.appendChild(toDoEditContainer);
 
-    let h3Text = document.createElement('h3');
-    h3Text.className = 'h3-modal-title';
-    h3Text.innerHTML = 'EDIT TODO';
+      let h3Text = document.createElement('h3');
+      h3Text.className = 'h3-modal-title';
+      h3Text.innerHTML = 'EDIT TODO';
 
-    toDoEditContainer.appendChild(h3Text);
+      toDoEditContainer.appendChild(h3Text);
 
 
-    //title label and input
-    let toDoEditRowTitle = document.createElement('div');
-    toDoEditRowTitle.className = 'create-todo-row create-todo-row-title';
-    let toDoEditRowTitleLabel = document.createElement('label');
-    toDoEditRowTitleLabel.className = 'create-todo-row-title-label';
-    toDoEditRowTitleLabel.setAttribute('for','todo-title');
-    toDoEditRowTitleLabel.innerHTML = 'Todo name:';
-    let toDoEditRowTitleInput = document.createElement('input');
-    toDoEditRowTitleInput.className = 'create-todo-row-title-input';
-    toDoEditRowTitleInput.type = 'text';
-    toDoEditRowTitleInput.name = 'todo-title';
-    toDoEditRowTitleInput.value = toDo.title;
+      //title label and input
+      let toDoEditRowTitle = document.createElement('div');
+      toDoEditRowTitle.className = 'create-todo-row create-todo-row-title';
+      let toDoEditRowTitleLabel = document.createElement('label');
+      toDoEditRowTitleLabel.className = 'create-todo-row-title-label';
+      toDoEditRowTitleLabel.setAttribute('for', 'todo-title');
+      toDoEditRowTitleLabel.innerHTML = 'Todo name:';
+      let toDoEditRowTitleInput = document.createElement('input');
+      toDoEditRowTitleInput.className = 'create-todo-row-title-input';
+      toDoEditRowTitleInput.type = 'text';
+      toDoEditRowTitleInput.name = 'todo-title';
+      toDoEditRowTitleInput.value = toDo.title;
 
-    toDoEditRowTitle.appendChild(toDoEditRowTitleLabel);
-    toDoEditRowTitle.appendChild(toDoEditRowTitleInput);
-    toDoEditContainer.appendChild(toDoEditRowTitle);
+      toDoEditRowTitle.appendChild(toDoEditRowTitleLabel);
+      toDoEditRowTitle.appendChild(toDoEditRowTitleInput);
+      toDoEditContainer.appendChild(toDoEditRowTitle);
 
-    //description label and input
-    let toDoEditRowDescription = document.createElement('div');
-    toDoEditRowDescription.className = 'create-todo-row create-todo-row-description';
-    let toDoEditRowDescriptionLabel = document.createElement('label');
-    toDoEditRowDescriptionLabel.className = 'create-todo-row-description-label';
-    toDoEditRowDescriptionLabel.setAttribute('for','todo-description');
-    toDoEditRowDescriptionLabel.innerHTML = 'Todo description:';
-    let toDoEditRowDescriptionInput = document.createElement('input');
-    toDoEditRowDescriptionInput.className = 'create-todo-row-description-input';
-    toDoEditRowDescriptionInput.type = 'text';
-    toDoEditRowDescriptionInput.name = 'todo-description';
-    toDoEditRowDescriptionInput.value = toDo.description;
+      //description label and input
+      let toDoEditRowDescription = document.createElement('div');
+      toDoEditRowDescription.className = 'create-todo-row create-todo-row-description';
+      let toDoEditRowDescriptionLabel = document.createElement('label');
+      toDoEditRowDescriptionLabel.className = 'create-todo-row-description-label';
+      toDoEditRowDescriptionLabel.setAttribute('for', 'todo-description');
+      toDoEditRowDescriptionLabel.innerHTML = 'Todo description:';
+      let toDoEditRowDescriptionInput = document.createElement('input');
+      toDoEditRowDescriptionInput.className = 'create-todo-row-description-input';
+      toDoEditRowDescriptionInput.type = 'text';
+      toDoEditRowDescriptionInput.name = 'todo-description';
+      toDoEditRowDescriptionInput.value = toDo.description;
 
-    toDoEditRowDescription.appendChild(toDoEditRowDescriptionLabel);
-    toDoEditRowDescription.appendChild(toDoEditRowDescriptionInput);
-    toDoEditContainer.appendChild(toDoEditRowDescription);
+      toDoEditRowDescription.appendChild(toDoEditRowDescriptionLabel);
+      toDoEditRowDescription.appendChild(toDoEditRowDescriptionInput);
+      toDoEditContainer.appendChild(toDoEditRowDescription);
 
-    //priority label and input
-    let toDoEditRowPriority = document.createElement('div');
-    toDoEditRowPriority.className = 'create-todo-row create-todo-row-priority';
-    let toDoEditRowPriorityLabel = document.createElement('label');
-    toDoEditRowPriorityLabel.className = 'create-todo-row-priority-label';
-    toDoEditRowPriorityLabel.setAttribute('for','todo-priority');
-    toDoEditRowPriorityLabel.innerHTML = 'Todo Priority:';
-    let toDoEditRowPriorityInput = document.createElement('input');
-    toDoEditRowPriorityInput.className = 'create-todo-row-priority-input';
-    toDoEditRowPriorityInput.type = 'range';
-    toDoEditRowPriorityInput.min = '1';
-    toDoEditRowPriorityInput.max = '10';
-    toDoEditRowPriorityInput.name = 'todo-priority';
-    toDoEditRowPriorityInput.value = toDo.priority;
-    toDoEditRowPriorityInput.setAttribute('data-value', "5");
+      //priority label and input
+      let toDoEditRowPriority = document.createElement('div');
+      toDoEditRowPriority.className = 'create-todo-row create-todo-row-priority';
+      let toDoEditRowPriorityLabel = document.createElement('label');
+      toDoEditRowPriorityLabel.className = 'create-todo-row-priority-label';
+      toDoEditRowPriorityLabel.setAttribute('for', 'todo-priority');
+      toDoEditRowPriorityLabel.innerHTML = 'Todo Priority:';
+      let toDoEditRowPriorityInput = document.createElement('input');
+      toDoEditRowPriorityInput.className = 'create-todo-row-priority-input';
+      toDoEditRowPriorityInput.type = 'range';
+      toDoEditRowPriorityInput.min = '1';
+      toDoEditRowPriorityInput.max = '10';
+      toDoEditRowPriorityInput.name = 'todo-priority';
+      toDoEditRowPriorityInput.value = toDo.priority;
+      toDoEditRowPriorityInput.setAttribute('data-value', "5");
 
-    toDoEditRowPriorityInput.addEventListener('input', function() {
-      event.target.setAttribute('data-value',toDoEditRowPriorityInput.value);
-    });
+      toDoEditRowPriorityInput.addEventListener('input', function() {
+        event.target.setAttribute('data-value', toDoEditRowPriorityInput.value);
+      });
 
-    toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
-    toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
-    toDoEditContainer.appendChild(toDoEditRowPriority);
+      toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
+      toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
+      toDoEditContainer.appendChild(toDoEditRowPriority);
 
-    //icons
-    let toDoIconsContainer = document.createElement('div');
-    toDoIconsContainer.className = 'icons-container';
-    let toDoIconsLabel = document.createElement('label');
-    toDoIconsLabel.className = 'icons-label';
-    toDoIconsLabel.innerHTML = 'Todos Icon :';
-    toDoIconsContainer.appendChild(toDoIconsLabel);
-    let toDoIconsGrid = document.createElement('div');
-    toDoIconsGrid.className = 'icons-grid';
-    for( var i of iconsNamesArray) {
-      let iconImg = document.createElement('img');
-      iconImg.className = 'icon icon-container-img';
-      iconImg.src = `./assets/imgs/icons/${i}`;
-      iconImg.alt = 'icon';
-      toDoIconsGrid.appendChild(iconImg);
+      //icons
+      let toDoIconsContainer = document.createElement('div');
+      toDoIconsContainer.className = 'icons-container';
+      let toDoIconsLabel = document.createElement('label');
+      toDoIconsLabel.className = 'icons-label';
+      toDoIconsLabel.innerHTML = 'Todos Icon :';
+      toDoIconsContainer.appendChild(toDoIconsLabel);
+      let toDoIconsGrid = document.createElement('div');
+      toDoIconsGrid.className = 'icons-grid';
+      for (var i of iconsNamesArray) {
+        let iconImg = document.createElement('img');
+        iconImg.className = 'icon icon-container-img';
+        iconImg.src = `./assets/imgs/icons/${i}`;
+        iconImg.alt = 'icon';
+        toDoIconsGrid.appendChild(iconImg);
 
-      if (iconImg.src == toDo.icon) {
-        iconImg.className = 'icon-container-img icon-container-img-checked';
+        if (iconImg.src == toDo.icon) {
+          iconImg.className = 'icon-container-img icon-container-img-checked';
+        }
+
+        iconImg.addEventListener('click', function(e) {
+          //making sure there is only one item with that class
+          removeClass(document.querySelectorAll('.icon-container-img'), 'icon-container-img-checked');
+          this.classList.add('icon-container-img-checked');
+        });
+      }
+      toDoIconsContainer.appendChild(toDoIconsGrid);
+      toDoEditContainer.appendChild(toDoIconsContainer);
+
+
+      //buttons
+      let buttonsDiv = document.createElement('div');
+      buttonsDiv.className = 'buttons-div';
+      let buttonLeft = document.createElement('button');
+      buttonLeft.className = 'buttons buttons-left';
+      buttonLeft.innerHTML = 'Create TODO';
+      let buttonRight = document.createElement('button');
+      buttonRight.className = 'buttons buttons-right';
+      buttonRight.innerHTML = 'Close';
+
+      buttonsDiv.appendChild(buttonLeft);
+      buttonsDiv.appendChild(buttonRight);
+      toDoEditContainer.appendChild(buttonsDiv);
+
+      buttonRight.addEventListener('click', function() {
+        toDoEditModal.parentNode.removeChild(toDoEditModal);
+      });
+
+      buttonLeft.addEventListener('click', function() {
+        toDoHandler(project, toDo);
+        resetValue(toDoEditModal);
+        toDoEditModal.parentNode.removeChild(toDoEditModal);
+      });
+
+      document.body.appendChild(toDoEditModal);
+
+    } else {
+      //WITHOUT TODO, WE SIMPLY JUST CREATE A MENU WITH EMPTY INPUTS TO CREATE A NEW ONE
+
+      let toDoEditModal = document.createElement('div');
+      toDoEditModal.className = 'create-project-modal create-todo-modal';
+
+      //main container
+      let toDoEditContainer = document.createElement('div');
+      toDoEditContainer.className = 'create-project-container create-todo-container';
+
+      toDoEditModal.appendChild(toDoEditContainer);
+
+      let h3Text = document.createElement('h3');
+      h3Text.className = 'h3-modal-title';
+      h3Text.innerHTML = 'CREATE TODO';
+
+      toDoEditContainer.appendChild(h3Text);
+
+      //title label and input
+      let toDoEditRowTitle = document.createElement('div');
+      toDoEditRowTitle.className = 'create-todo-row create-todo-row-title';
+      let toDoEditRowTitleLabel = document.createElement('label');
+      toDoEditRowTitleLabel.className = 'create-todo-row-title-label';
+      toDoEditRowTitleLabel.setAttribute('for', 'todo-title');
+      toDoEditRowTitleLabel.innerHTML = 'todo name:';
+      let toDoEditRowTitleInput = document.createElement('input');
+      toDoEditRowTitleInput.className = 'create-todo-row-title-input';
+      toDoEditRowTitleInput.type = 'text';
+      toDoEditRowTitleInput.name = 'todo-title';
+
+      toDoEditRowTitle.appendChild(toDoEditRowTitleLabel);
+      toDoEditRowTitle.appendChild(toDoEditRowTitleInput);
+      toDoEditContainer.appendChild(toDoEditRowTitle);
+
+      //description label and input
+      let toDoEditRowDescription = document.createElement('div');
+      toDoEditRowDescription.className = 'create-todo-row create-todo-row-description';
+      let toDoEditRowDescriptionLabel = document.createElement('label');
+      toDoEditRowDescriptionLabel.className = 'create-todo-row-description-label';
+      toDoEditRowDescriptionLabel.setAttribute('for', 'todo-description');
+      toDoEditRowDescriptionLabel.innerHTML = 'todo description:';
+      let toDoEditRowDescriptionInput = document.createElement('input');
+      toDoEditRowDescriptionInput.className = 'create-todo-row-description-input';
+      toDoEditRowDescriptionInput.type = 'text';
+      toDoEditRowDescriptionInput.name = 'todo-description';
+
+      toDoEditRowDescription.appendChild(toDoEditRowDescriptionLabel);
+      toDoEditRowDescription.appendChild(toDoEditRowDescriptionInput);
+      toDoEditContainer.appendChild(toDoEditRowDescription);
+
+      //priority label and input
+      let toDoEditRowPriority = document.createElement('div');
+      toDoEditRowPriority.className = 'create-todo-row create-todo-row-priority';
+      let toDoEditRowPriorityLabel = document.createElement('label');
+      toDoEditRowPriorityLabel.className = 'create-todo-row-priority-label';
+      toDoEditRowPriorityLabel.setAttribute('for', 'todo-priority');
+      toDoEditRowPriorityLabel.innerHTML = 'todo Priority:';
+      let toDoEditRowPriorityInput = document.createElement('input');
+      toDoEditRowPriorityInput.className = 'create-todo-row-priority-input';
+      toDoEditRowPriorityInput.type = 'range';
+      toDoEditRowPriorityInput.min = '1';
+      toDoEditRowPriorityInput.max = '10';
+      toDoEditRowPriorityInput.value = '5';
+      toDoEditRowPriorityInput.name = 'todo-priority';
+      toDoEditRowPriorityInput.setAttribute('data-value', "5");
+
+      toDoEditRowPriorityInput.addEventListener('input', function() {
+        event.target.setAttribute('data-value', toDoEditRowPriorityInput.value);
+      });
+
+      toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
+      toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
+      toDoEditContainer.appendChild(toDoEditRowPriority);
+
+      //icons
+      let toDoIconsContainer = document.createElement('div');
+      toDoIconsContainer.className = 'icons-container';
+      let toDoIconsLabel = document.createElement('label');
+      toDoIconsLabel.className = 'icons-label';
+      toDoIconsLabel.innerHTML = 'Todos Icon :';
+      toDoIconsContainer.appendChild(toDoIconsLabel);
+      let toDoIconsGrid = document.createElement('div');
+      toDoIconsGrid.className = 'icons-grid';
+      for (var i of iconsNamesArray) {
+        let iconImg = document.createElement('img');
+        iconImg.className = 'icon icon-container-img';
+        iconImg.src = `./assets/imgs/icons/${i}`;
+        iconImg.alt = 'icon';
+        toDoIconsGrid.appendChild(iconImg);
+
+        iconImg.addEventListener('click', function(e) {
+          //making sure there is only one item with that class
+          removeClass(document.querySelectorAll('.icon-container-img'), 'icon-container-img-checked');
+          this.classList.add('icon-container-img-checked');
+        });
       }
 
-      iconImg.addEventListener('click', function(e) {
-        //making sure there is only one item with that class
-        removeClass(document.querySelectorAll('.icon-container-img'),'icon-container-img-checked');
-        this.classList.add('icon-container-img-checked');
+      toDoIconsContainer.appendChild(toDoIconsGrid);
+      toDoEditContainer.appendChild(toDoIconsContainer);
+
+      //buttons
+      let buttonsDiv = document.createElement('div');
+      buttonsDiv.className = 'buttons-div';
+      let buttonLeft = document.createElement('button');
+      buttonLeft.className = 'buttons buttons-left';
+      buttonLeft.innerHTML = 'Create TODO';
+      let buttonRight = document.createElement('button');
+      buttonRight.className = 'buttons buttons-right';
+      buttonRight.innerHTML = 'Close';
+
+      buttonsDiv.appendChild(buttonLeft);
+      buttonsDiv.appendChild(buttonRight);
+      toDoEditContainer.appendChild(buttonsDiv);
+
+      buttonRight.addEventListener('click', function() {
+        toDoEditModal.parentNode.removeChild(toDoEditModal);
       });
-    }
-    toDoIconsContainer.appendChild(toDoIconsGrid);
-    toDoEditContainer.appendChild(toDoIconsContainer);
 
-
-    //buttons
-    let buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'buttons-div';
-    let buttonLeft =document.createElement('button');
-    buttonLeft.className = 'buttons buttons-left';
-    buttonLeft.innerHTML = 'Create TODO';
-    let buttonRight =document.createElement('button');
-    buttonRight.className = 'buttons buttons-right';
-    buttonRight.innerHTML = 'Close';
-
-    buttonsDiv.appendChild(buttonLeft);
-    buttonsDiv.appendChild(buttonRight);
-    toDoEditContainer.appendChild(buttonsDiv);
-
-    buttonRight.addEventListener('click',function() {
-      toDoEditModal.parentNode.removeChild(toDoEditModal);
-    });
-
-    buttonLeft.addEventListener('click',function() {
-      toDoHandler(project,toDo);
-      resetValue(toDoEditModal);
-      toDoEditModal.parentNode.removeChild(toDoEditModal);
-    });
-
-    document.body.appendChild(toDoEditModal);
-
-  } else {
-    //WITHOUT TODO, WE SIMPLY JUST CREATE A MENU WITH EMPTY INPUTS TO CREATE A NEW ONE
-
-    let toDoEditModal = document.createElement('div');
-    toDoEditModal.className = 'create-project-modal create-todo-modal';
-
-    //main container
-    let toDoEditContainer = document.createElement('div');
-    toDoEditContainer.className = 'create-project-container create-todo-container';
-
-    toDoEditModal.appendChild(toDoEditContainer);
-
-    let h3Text = document.createElement('h3');
-    h3Text.className = 'h3-modal-title';
-    h3Text.innerHTML = 'CREATE TODO';
-
-    toDoEditContainer.appendChild(h3Text);
-
-    //title label and input
-    let toDoEditRowTitle = document.createElement('div');
-    toDoEditRowTitle.className = 'create-todo-row create-todo-row-title';
-    let toDoEditRowTitleLabel = document.createElement('label');
-    toDoEditRowTitleLabel.className = 'create-todo-row-title-label';
-    toDoEditRowTitleLabel.setAttribute('for','todo-title');
-    toDoEditRowTitleLabel.innerHTML = 'todo name:';
-    let toDoEditRowTitleInput = document.createElement('input');
-    toDoEditRowTitleInput.className = 'create-todo-row-title-input';
-    toDoEditRowTitleInput.type = 'text';
-    toDoEditRowTitleInput.name = 'todo-title';
-
-    toDoEditRowTitle.appendChild(toDoEditRowTitleLabel);
-    toDoEditRowTitle.appendChild(toDoEditRowTitleInput);
-    toDoEditContainer.appendChild(toDoEditRowTitle);
-
-    //description label and input
-    let toDoEditRowDescription = document.createElement('div');
-    toDoEditRowDescription.className = 'create-todo-row create-todo-row-description';
-    let toDoEditRowDescriptionLabel = document.createElement('label');
-    toDoEditRowDescriptionLabel.className = 'create-todo-row-description-label';
-    toDoEditRowDescriptionLabel.setAttribute('for','todo-description');
-    toDoEditRowDescriptionLabel.innerHTML = 'todo description:';
-    let toDoEditRowDescriptionInput = document.createElement('input');
-    toDoEditRowDescriptionInput.className = 'create-todo-row-description-input';
-    toDoEditRowDescriptionInput.type = 'text';
-    toDoEditRowDescriptionInput.name = 'todo-description';
-
-    toDoEditRowDescription.appendChild(toDoEditRowDescriptionLabel);
-    toDoEditRowDescription.appendChild(toDoEditRowDescriptionInput);
-    toDoEditContainer.appendChild(toDoEditRowDescription);
-
-    //priority label and input
-    let toDoEditRowPriority = document.createElement('div');
-    toDoEditRowPriority.className = 'create-todo-row create-todo-row-priority';
-    let toDoEditRowPriorityLabel = document.createElement('label');
-    toDoEditRowPriorityLabel.className = 'create-todo-row-priority-label';
-    toDoEditRowPriorityLabel.setAttribute('for','todo-priority');
-    toDoEditRowPriorityLabel.innerHTML = 'todo Priority:';
-    let toDoEditRowPriorityInput = document.createElement('input');
-    toDoEditRowPriorityInput.className = 'create-todo-row-priority-input';
-    toDoEditRowPriorityInput.type = 'range';
-    toDoEditRowPriorityInput.min = '1';
-    toDoEditRowPriorityInput.max = '10';
-    toDoEditRowPriorityInput.value = '5';
-    toDoEditRowPriorityInput.name = 'todo-priority';
-    toDoEditRowPriorityInput.setAttribute('data-value', "5");
-
-    toDoEditRowPriorityInput.addEventListener('input', function() {
-      event.target.setAttribute('data-value',toDoEditRowPriorityInput.value);
-    });
-
-    toDoEditRowPriority.appendChild(toDoEditRowPriorityLabel);
-    toDoEditRowPriority.appendChild(toDoEditRowPriorityInput);
-    toDoEditContainer.appendChild(toDoEditRowPriority);
-
-    //icons
-    let toDoIconsContainer = document.createElement('div');
-    toDoIconsContainer.className = 'icons-container';
-    let toDoIconsLabel = document.createElement('label');
-    toDoIconsLabel.className = 'icons-label';
-    toDoIconsLabel.innerHTML = 'Todos Icon :';
-    toDoIconsContainer.appendChild(toDoIconsLabel);
-    let toDoIconsGrid = document.createElement('div');
-    toDoIconsGrid.className = 'icons-grid';
-    for( var i of iconsNamesArray) {
-      let iconImg = document.createElement('img');
-      iconImg.className = 'icon icon-container-img';
-      iconImg.src = `./assets/imgs/icons/${i}`;
-      iconImg.alt = 'icon';
-      toDoIconsGrid.appendChild(iconImg);
-
-      iconImg.addEventListener('click', function(e) {
-        //making sure there is only one item with that class
-        removeClass(document.querySelectorAll('.icon-container-img'),'icon-container-img-checked');
-        this.classList.add('icon-container-img-checked');
+      buttonLeft.addEventListener('click', function() {
+        toDoHandler(project);
+        resetValue(toDoEditModal);
+        toDoEditModal.parentNode.removeChild(toDoEditModal);
       });
+
+      document.body.appendChild(toDoEditModal);
+
     }
+  };
 
-    toDoIconsContainer.appendChild(toDoIconsGrid);
-    toDoEditContainer.appendChild(toDoIconsContainer);
+  // ======================================================================================
+  // SPAWNER OF "MENU TO CREATE PROJECTS"
+  // ======================================================================================
 
-    //buttons
-    let buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'buttons-div';
-    let buttonLeft =document.createElement('button');
-    buttonLeft.className = 'buttons buttons-left';
-    buttonLeft.innerHTML = 'Create TODO';
-    let buttonRight =document.createElement('button');
-    buttonRight.className = 'buttons buttons-right';
-    buttonRight.innerHTML = 'Close';
+  const createProjectMenuSpawner = (project) => {
 
-    buttonsDiv.appendChild(buttonLeft);
-    buttonsDiv.appendChild(buttonRight);
-    toDoEditContainer.appendChild(buttonsDiv);
-
-    buttonRight.addEventListener('click',function() {
-      toDoEditModal.parentNode.removeChild(toDoEditModal);
-    });
-
-    buttonLeft.addEventListener('click',function() {
-      toDoHandler(project);
-      resetValue(toDoEditModal);
-      toDoEditModal.parentNode.removeChild(toDoEditModal);
-    });
-
-    document.body.appendChild(toDoEditModal);
-
-  }
-};
-
-// ======================================================================================
-// SPAWNER OF "MENU TO CREATE PROJECTS"
-// ======================================================================================
-
-const createProjectMenuSpawner = (project) => {
-
-  if (project) {
-    //IF WE GET A PROJECT - WE SPAWN ONE WITH ITS DATA TO BE EDITED
-    if (projectsArray.includes(project)) {
+    if (project) {
+      //IF WE GET A PROJECT - WE SPAWN ONE WITH ITS DATA TO BE EDITED
+      if (projectsArray.includes(project)) {
 
 
+        let projectEditModal = document.createElement('div');
+        projectEditModal.className = 'create-project-modal';
+
+        //main container
+        let projectEditContainer = document.createElement('div');
+        projectEditContainer.className = 'create-project-container';
+
+        projectEditModal.appendChild(projectEditContainer);
+
+        let h3Text = document.createElement('h3');
+        h3Text.className = 'h3-modal-title';
+        h3Text.innerHTML = 'EDIT PROJECT';
+
+        projectEditContainer.appendChild(h3Text);
+
+        //title label and input
+        let projectEditRowTitle = document.createElement('div');
+        projectEditRowTitle.className = 'create-project-row create-project-row-title';
+        let projectEditRowTitleLabel = document.createElement('label');
+        projectEditRowTitleLabel.className = 'create-project-row-title-label';
+        projectEditRowTitleLabel.setAttribute('for', 'project-title');
+        projectEditRowTitleLabel.innerHTML = 'Project name:';
+        let projectEditRowTitleInput = document.createElement('input');
+        projectEditRowTitleInput.className = 'create-project-row-title-input';
+        projectEditRowTitleInput.type = 'text';
+        projectEditRowTitleInput.name = 'project-title';
+        projectEditRowTitleInput.value = project.title;
+
+        projectEditRowTitle.appendChild(projectEditRowTitleLabel);
+        projectEditRowTitle.appendChild(projectEditRowTitleInput);
+        projectEditContainer.appendChild(projectEditRowTitle);
+
+        //description label and input
+        let projectEditRowDescription = document.createElement('div');
+        projectEditRowDescription.className = 'create-project-row create-project-row-description';
+        let projectEditRowDescriptionLabel = document.createElement('label');
+        projectEditRowDescriptionLabel.className = 'create-project-row-description-label';
+        projectEditRowDescriptionLabel.setAttribute('for', 'project-description');
+        projectEditRowDescriptionLabel.innerHTML = 'Project description:';
+        let projectEditRowDescriptionInput = document.createElement('input');
+        projectEditRowDescriptionInput.className = 'create-project-row-description-input';
+        projectEditRowDescriptionInput.type = 'text';
+        projectEditRowDescriptionInput.name = 'project-description';
+        projectEditRowDescriptionInput.value = project.description;
+
+        projectEditRowDescription.appendChild(projectEditRowDescriptionLabel);
+        projectEditRowDescription.appendChild(projectEditRowDescriptionInput);
+        projectEditContainer.appendChild(projectEditRowDescription);
+
+        //date label and input
+        let projectEditRowDate = document.createElement('div');
+        projectEditRowDate.className = 'create-project-row create-project-row-date';
+        let projectEditRowDateLabel = document.createElement('label');
+        projectEditRowDateLabel.className = 'create-project-row-date-label';
+        projectEditRowDateLabel.setAttribute('for', 'project-date');
+        projectEditRowDateLabel.innerHTML = 'Project Date:';
+        let projectEditRowDateInput = document.createElement('input');
+        projectEditRowDateInput.className = 'create-project-row-date-input';
+        projectEditRowDateInput.type = 'date';
+        projectEditRowDateInput.name = 'project-date';
+        projectEditRowDateInput.value = project.dueDate;
+
+        projectEditRowDate.appendChild(projectEditRowDateLabel);
+        projectEditRowDate.appendChild(projectEditRowDateInput);
+        projectEditContainer.appendChild(projectEditRowDate);
+
+        //priority label and input
+        let projectEditRowPriority = document.createElement('div');
+        projectEditRowPriority.className = 'create-project-row create-project-row-priority';
+        let projectEditRowPriorityLabel = document.createElement('label');
+        projectEditRowPriorityLabel.className = 'create-project-row-priority-label';
+        projectEditRowPriorityLabel.setAttribute('for', 'project-priority');
+        projectEditRowPriorityLabel.innerHTML = 'Project Priority:';
+        let projectEditRowPriorityInput = document.createElement('input');
+        projectEditRowPriorityInput.className = 'create-project-row-priority-input';
+        projectEditRowPriorityInput.type = 'range';
+        projectEditRowPriorityInput.min = '1';
+        projectEditRowPriorityInput.max = '10';
+        projectEditRowPriorityInput.value = project.priority;
+        projectEditRowPriorityInput.name = 'project-priority';
+        projectEditRowPriorityInput.setAttribute('data-value', "5");
+
+        projectEditRowPriorityInput.addEventListener('input', function() {
+          event.target.setAttribute('data-value', projectEditRowPriorityInput.value);
+        });
+
+        projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
+        projectEditRowPriority.appendChild(projectEditRowPriorityInput);
+        projectEditContainer.appendChild(projectEditRowPriority);
+
+        //buttons
+        let buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'buttons-div';
+        let buttonLeft = document.createElement('button');
+        buttonLeft.className = 'buttons buttons-left';
+        buttonLeft.innerHTML = 'Create Project';
+        let buttonRight = document.createElement('button');
+        buttonRight.className = 'buttons buttons-right';
+        buttonRight.innerHTML = 'Close';
+
+        buttonsDiv.appendChild(buttonLeft);
+        buttonsDiv.appendChild(buttonRight);
+        projectEditContainer.appendChild(buttonsDiv);
+
+        //Close button will delete the entire modal
+        buttonRight.addEventListener('click', function() {
+          resetValue(projectEditModal);
+          projectEditModal.parentNode.removeChild(projectEditModal);
+        });
+
+        //Create a new project button
+        buttonLeft.addEventListener('click', function() {
+          projectHandler(project);
+          resetValue(projectEditModal);
+          projectEditModal.parentNode.removeChild(projectEditModal);
+        });
+
+        document.body.appendChild(projectEditModal);
+
+      }
+
+    } else {
+      //WITHOUT PROJECT, WE SIMPLY JUST CREATE A MENU WITH EMPTY INPUTS TO CREATE A NEW ONE
+      //main tab
       let projectEditModal = document.createElement('div');
       projectEditModal.className = 'create-project-modal';
 
@@ -350,22 +481,22 @@ const createProjectMenuSpawner = (project) => {
 
       let h3Text = document.createElement('h3');
       h3Text.className = 'h3-modal-title';
-      h3Text.innerHTML = 'EDIT PROJECT';
+      h3Text.innerHTML = 'CREATE PROJECT';
 
       projectEditContainer.appendChild(h3Text);
+
 
       //title label and input
       let projectEditRowTitle = document.createElement('div');
       projectEditRowTitle.className = 'create-project-row create-project-row-title';
       let projectEditRowTitleLabel = document.createElement('label');
       projectEditRowTitleLabel.className = 'create-project-row-title-label';
-      projectEditRowTitleLabel.setAttribute('for','project-title');
+      projectEditRowTitleLabel.setAttribute('for', 'project-title');
       projectEditRowTitleLabel.innerHTML = 'Project name:';
       let projectEditRowTitleInput = document.createElement('input');
       projectEditRowTitleInput.className = 'create-project-row-title-input';
       projectEditRowTitleInput.type = 'text';
       projectEditRowTitleInput.name = 'project-title';
-      projectEditRowTitleInput.value = project.title;
 
       projectEditRowTitle.appendChild(projectEditRowTitleLabel);
       projectEditRowTitle.appendChild(projectEditRowTitleInput);
@@ -376,13 +507,12 @@ const createProjectMenuSpawner = (project) => {
       projectEditRowDescription.className = 'create-project-row create-project-row-description';
       let projectEditRowDescriptionLabel = document.createElement('label');
       projectEditRowDescriptionLabel.className = 'create-project-row-description-label';
-      projectEditRowDescriptionLabel.setAttribute('for','project-description');
+      projectEditRowDescriptionLabel.setAttribute('for', 'project-description');
       projectEditRowDescriptionLabel.innerHTML = 'Project description:';
       let projectEditRowDescriptionInput = document.createElement('input');
       projectEditRowDescriptionInput.className = 'create-project-row-description-input';
       projectEditRowDescriptionInput.type = 'text';
       projectEditRowDescriptionInput.name = 'project-description';
-      projectEditRowDescriptionInput.value = project.description;
 
       projectEditRowDescription.appendChild(projectEditRowDescriptionLabel);
       projectEditRowDescription.appendChild(projectEditRowDescriptionInput);
@@ -393,13 +523,12 @@ const createProjectMenuSpawner = (project) => {
       projectEditRowDate.className = 'create-project-row create-project-row-date';
       let projectEditRowDateLabel = document.createElement('label');
       projectEditRowDateLabel.className = 'create-project-row-date-label';
-      projectEditRowDateLabel.setAttribute('for','project-date');
+      projectEditRowDateLabel.setAttribute('for', 'project-date');
       projectEditRowDateLabel.innerHTML = 'Project Date:';
       let projectEditRowDateInput = document.createElement('input');
       projectEditRowDateInput.className = 'create-project-row-date-input';
       projectEditRowDateInput.type = 'date';
       projectEditRowDateInput.name = 'project-date';
-      projectEditRowDateInput.value = project.dueDate;
 
       projectEditRowDate.appendChild(projectEditRowDateLabel);
       projectEditRowDate.appendChild(projectEditRowDateInput);
@@ -410,19 +539,19 @@ const createProjectMenuSpawner = (project) => {
       projectEditRowPriority.className = 'create-project-row create-project-row-priority';
       let projectEditRowPriorityLabel = document.createElement('label');
       projectEditRowPriorityLabel.className = 'create-project-row-priority-label';
-      projectEditRowPriorityLabel.setAttribute('for','project-priority');
+      projectEditRowPriorityLabel.setAttribute('for', 'project-priority');
       projectEditRowPriorityLabel.innerHTML = 'Project Priority:';
       let projectEditRowPriorityInput = document.createElement('input');
       projectEditRowPriorityInput.className = 'create-project-row-priority-input';
       projectEditRowPriorityInput.type = 'range';
       projectEditRowPriorityInput.min = '1';
       projectEditRowPriorityInput.max = '10';
-      projectEditRowPriorityInput.value = project.priority;
+      projectEditRowPriorityInput.value = '5';
       projectEditRowPriorityInput.name = 'project-priority';
       projectEditRowPriorityInput.setAttribute('data-value', "5");
 
       projectEditRowPriorityInput.addEventListener('input', function() {
-        event.target.setAttribute('data-value',projectEditRowPriorityInput.value);
+        event.target.setAttribute('data-value', projectEditRowPriorityInput.value);
       });
 
       projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
@@ -432,10 +561,10 @@ const createProjectMenuSpawner = (project) => {
       //buttons
       let buttonsDiv = document.createElement('div');
       buttonsDiv.className = 'buttons-div';
-      let buttonLeft =document.createElement('button');
+      let buttonLeft = document.createElement('button');
       buttonLeft.className = 'buttons buttons-left';
       buttonLeft.innerHTML = 'Create Project';
-      let buttonRight =document.createElement('button');
+      let buttonRight = document.createElement('button');
       buttonRight.className = 'buttons buttons-right';
       buttonRight.innerHTML = 'Close';
 
@@ -444,14 +573,14 @@ const createProjectMenuSpawner = (project) => {
       projectEditContainer.appendChild(buttonsDiv);
 
       //Close button will delete the entire modal
-      buttonRight.addEventListener('click',function() {
+      buttonRight.addEventListener('click', function() {
         resetValue(projectEditModal);
         projectEditModal.parentNode.removeChild(projectEditModal);
       });
 
       //Create a new project button
-      buttonLeft.addEventListener('click',function() {
-        projectHandler(project);
+      buttonLeft.addEventListener('click', function() {
+        projectHandler();
         resetValue(projectEditModal);
         projectEditModal.parentNode.removeChild(projectEditModal);
       });
@@ -459,152 +588,30 @@ const createProjectMenuSpawner = (project) => {
       document.body.appendChild(projectEditModal);
 
     }
+  };
 
-  } else {
-    //WITHOUT PROJECT, WE SIMPLY JUST CREATE A MENU WITH EMPTY INPUTS TO CREATE A NEW ONE
-    //main tab
-    let projectEditModal = document.createElement('div');
-    projectEditModal.className = 'create-project-modal';
-
-    //main container
-    let projectEditContainer = document.createElement('div');
-    projectEditContainer.className = 'create-project-container';
-
-    projectEditModal.appendChild(projectEditContainer);
-
-    let h3Text = document.createElement('h3');
-    h3Text.className = 'h3-modal-title';
-    h3Text.innerHTML = 'CREATE PROJECT';
-
-    projectEditContainer.appendChild(h3Text);
-
-
-    //title label and input
-    let projectEditRowTitle = document.createElement('div');
-    projectEditRowTitle.className = 'create-project-row create-project-row-title';
-    let projectEditRowTitleLabel = document.createElement('label');
-    projectEditRowTitleLabel.className = 'create-project-row-title-label';
-    projectEditRowTitleLabel.setAttribute('for','project-title');
-    projectEditRowTitleLabel.innerHTML = 'Project name:';
-    let projectEditRowTitleInput = document.createElement('input');
-    projectEditRowTitleInput.className = 'create-project-row-title-input';
-    projectEditRowTitleInput.type = 'text';
-    projectEditRowTitleInput.name = 'project-title';
-
-    projectEditRowTitle.appendChild(projectEditRowTitleLabel);
-    projectEditRowTitle.appendChild(projectEditRowTitleInput);
-    projectEditContainer.appendChild(projectEditRowTitle);
-
-    //description label and input
-    let projectEditRowDescription = document.createElement('div');
-    projectEditRowDescription.className = 'create-project-row create-project-row-description';
-    let projectEditRowDescriptionLabel = document.createElement('label');
-    projectEditRowDescriptionLabel.className = 'create-project-row-description-label';
-    projectEditRowDescriptionLabel.setAttribute('for','project-description');
-    projectEditRowDescriptionLabel.innerHTML = 'Project description:';
-    let projectEditRowDescriptionInput = document.createElement('input');
-    projectEditRowDescriptionInput.className = 'create-project-row-description-input';
-    projectEditRowDescriptionInput.type = 'text';
-    projectEditRowDescriptionInput.name = 'project-description';
-
-    projectEditRowDescription.appendChild(projectEditRowDescriptionLabel);
-    projectEditRowDescription.appendChild(projectEditRowDescriptionInput);
-    projectEditContainer.appendChild(projectEditRowDescription);
-
-    //date label and input
-    let projectEditRowDate = document.createElement('div');
-    projectEditRowDate.className = 'create-project-row create-project-row-date';
-    let projectEditRowDateLabel = document.createElement('label');
-    projectEditRowDateLabel.className = 'create-project-row-date-label';
-    projectEditRowDateLabel.setAttribute('for','project-date');
-    projectEditRowDateLabel.innerHTML = 'Project Date:';
-    let projectEditRowDateInput = document.createElement('input');
-    projectEditRowDateInput.className = 'create-project-row-date-input';
-    projectEditRowDateInput.type = 'date';
-    projectEditRowDateInput.name = 'project-date';
-
-    projectEditRowDate.appendChild(projectEditRowDateLabel);
-    projectEditRowDate.appendChild(projectEditRowDateInput);
-    projectEditContainer.appendChild(projectEditRowDate);
-
-    //priority label and input
-    let projectEditRowPriority = document.createElement('div');
-    projectEditRowPriority.className = 'create-project-row create-project-row-priority';
-    let projectEditRowPriorityLabel = document.createElement('label');
-    projectEditRowPriorityLabel.className = 'create-project-row-priority-label';
-    projectEditRowPriorityLabel.setAttribute('for','project-priority');
-    projectEditRowPriorityLabel.innerHTML = 'Project Priority:';
-    let projectEditRowPriorityInput = document.createElement('input');
-    projectEditRowPriorityInput.className = 'create-project-row-priority-input';
-    projectEditRowPriorityInput.type = 'range';
-    projectEditRowPriorityInput.min = '1';
-    projectEditRowPriorityInput.max = '10';
-    projectEditRowPriorityInput.value = '5';
-    projectEditRowPriorityInput.name = 'project-priority';
-    projectEditRowPriorityInput.setAttribute('data-value', "5");
-
-    projectEditRowPriorityInput.addEventListener('input', function() {
-      event.target.setAttribute('data-value',projectEditRowPriorityInput.value);
-    });
-
-    projectEditRowPriority.appendChild(projectEditRowPriorityLabel);
-    projectEditRowPriority.appendChild(projectEditRowPriorityInput);
-    projectEditContainer.appendChild(projectEditRowPriority);
-
-    //buttons
-    let buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'buttons-div';
-    let buttonLeft =document.createElement('button');
-    buttonLeft.className = 'buttons buttons-left';
-    buttonLeft.innerHTML = 'Create Project';
-    let buttonRight =document.createElement('button');
-    buttonRight.className = 'buttons buttons-right';
-    buttonRight.innerHTML = 'Close';
-
-    buttonsDiv.appendChild(buttonLeft);
-    buttonsDiv.appendChild(buttonRight);
-    projectEditContainer.appendChild(buttonsDiv);
-
-    //Close button will delete the entire modal
-    buttonRight.addEventListener('click',function() {
-      resetValue(projectEditModal);
-      projectEditModal.parentNode.removeChild(projectEditModal);
-    });
-
-    //Create a new project button
-    buttonLeft.addEventListener('click',function() {
-      projectHandler();
-      resetValue(projectEditModal);
-      projectEditModal.parentNode.removeChild(projectEditModal);
-    });
-
-    document.body.appendChild(projectEditModal);
-
+  //delete a TODO
+  function deleteToDo(project, toDo) {
+    //if a project does include provided toDo, it deletes it.
+    if (project.toDos.includes(toDo)) {
+      project.toDos.splice(project.toDos.indexOf(toDo), 1);
+      saveToLocalStorage(projectsArray);
+      renderProjectMain(project);
+    } else {
+      console.error('Project does not include that toDo');
+      return;
+    }
+    event.stopImmediatePropagation();
   }
-};
 
-//delete a TODO
-function deleteToDo(project,toDo) {
-  //if a project does include provided toDo, it deletes it.
-  if (project.toDos.includes(toDo)) {
-    project.toDos.splice(project.toDos.indexOf(toDo),1);
-    saveToLocalStorage(projectsArray);
-    renderProjectMain(project);
-  }else {
-    console.error('Project does not include that toDo');
-    return;
+  //edit a TODO
+  function editToDo(project, toDo) {
+    createToDoMenuSpawner(true, project, toDo);
   }
-  event.stopImmediatePropagation();
-}
-
-//edit a TODO
-function editToDo(project,toDo) {
-  createToDoMenuSpawner(true,project,toDo);
-}
 
   //CREATION OF A toDo ROW ===============================================================================================================================
   //A small management mistake, should have gone for only 2 arguments
-  const createToDoRow = ([...toDos],nodeToAppend,project) => {
+  const createToDoRow = ([...toDos], nodeToAppend, project) => {
     for (var i of toDos) {
       //main DIV
       let mainToDoRow = document.createElement('div');
@@ -661,7 +668,7 @@ function editToDo(project,toDo) {
       informationDiv.appendChild(toDoEditDiv);
 
       //EDIT TODO FUNCTION LISTENER
-      toDoEditDiv.addEventListener('click',editToDo.bind(this,project,i));
+      toDoEditDiv.addEventListener('click', editToDo.bind(this, project, i));
 
       //TODO DELETE
       let toDoDeleteDiv = document.createElement('div');
@@ -674,7 +681,7 @@ function editToDo(project,toDo) {
       informationDiv.appendChild(toDoDeleteDiv);
 
       //Function that invokes after clicking the Delete button
-      toDoDeleteDiv.addEventListener('click', deleteToDo.bind(this,project,i));
+      toDoDeleteDiv.addEventListener('click', deleteToDo.bind(this, project, i));
 
       //adding the information div as the upper row
       mainToDoRow.appendChild(informationDiv);
@@ -697,7 +704,7 @@ function editToDo(project,toDo) {
 
   //Function for the arrows to show more details about a project.
   function showMoreDetails(e) {
-  e.target.parentNode.parentNode.parentNode.children[1].classList.toggle('d-none');
+    e.target.parentNode.parentNode.parentNode.children[1].classList.toggle('d-none');
   }
 
   // ===================================================================================================================================================================
@@ -707,136 +714,136 @@ function editToDo(project,toDo) {
     if (projectMainContainer) {
       //Fast clear of projects
       deleteAllChildNodes(projectMainContainer);
-        if (project instanceof Project && projectMainContainer) {
-          let projectDiv = document.createElement('div');
-          projectDiv.classList.add('project-div-shortcut');
-          projectDiv.setAttribute('data-project',project._id);
+      if (project instanceof Project && projectMainContainer) {
+        let projectDiv = document.createElement('div');
+        projectDiv.classList.add('project-div-shortcut');
+        projectDiv.setAttribute('data-project', project._id);
 
-          //THE Project Name Div creation
-          let projectName = document.createElement('div');
-          projectName.classList.add('project-name-container');
-          let projectNameSpan = document.createElement('span');
-          projectNameSpan.classList.add('project-name-container-span');
-          projectNameSpan.innerHTML = project.title;
-          projectName.appendChild(projectNameSpan);
+        //THE Project Name Div creation
+        let projectName = document.createElement('div');
+        projectName.classList.add('project-name-container');
+        let projectNameSpan = document.createElement('span');
+        projectNameSpan.classList.add('project-name-container-span');
+        projectNameSpan.innerHTML = project.title;
+        projectName.appendChild(projectNameSpan);
 
-          //The Project Remaining time Div creation
-          let projectTime = document.createElement('div');
-          projectTime.classList.add('project-time-container');
-          let instructionTime = document.createElement('div');
-          instructionTime.className = 'instruction instruction-time';
-          instructionTime.innerHTML = "remaining time:";
-          let projectTimeSpan = document.createElement('div');
-          projectTimeSpan.classList.add('project-time-container-span');
-          projectTimeSpan.innerHTML = project.projectTimeLimit;
-          projectTime.appendChild(instructionTime);
-          projectTime.appendChild(projectTimeSpan);
+        //The Project Remaining time Div creation
+        let projectTime = document.createElement('div');
+        projectTime.classList.add('project-time-container');
+        let instructionTime = document.createElement('div');
+        instructionTime.className = 'instruction instruction-time';
+        instructionTime.innerHTML = "remaining time:";
+        let projectTimeSpan = document.createElement('div');
+        projectTimeSpan.classList.add('project-time-container-span');
+        projectTimeSpan.innerHTML = project.projectTimeLimit;
+        projectTime.appendChild(instructionTime);
+        projectTime.appendChild(projectTimeSpan);
 
-          //Project Priority
-          let projectPriority = document.createElement('div');
-          projectPriority.classList.add('project-priority-container');
-          let instructionPriority = document.createElement('div');
-          instructionPriority.className = 'instruction instruction-priority';
-          instructionPriority.innerHTML = "priority:";
-          let projectPrioritySpan = document.createElement('div');
-          projectPrioritySpan.classList.add('project-priority-container-span');
-          projectPrioritySpan.innerHTML = project.priority;
-          projectPriority.appendChild(instructionPriority);
-          projectPriority.appendChild(projectPrioritySpan);
+        //Project Priority
+        let projectPriority = document.createElement('div');
+        projectPriority.classList.add('project-priority-container');
+        let instructionPriority = document.createElement('div');
+        instructionPriority.className = 'instruction instruction-priority';
+        instructionPriority.innerHTML = "priority:";
+        let projectPrioritySpan = document.createElement('div');
+        projectPrioritySpan.classList.add('project-priority-container-span');
+        projectPrioritySpan.innerHTML = project.priority;
+        projectPriority.appendChild(instructionPriority);
+        projectPriority.appendChild(projectPrioritySpan);
 
-          //Project edit
+        //Project edit
 
-          let projectEdit = document.createElement('div');
-          projectEdit.classList.add('project-edit');
-          let projectEditIcon = document.createElement('img');
-          projectEditIcon.className = 'icon project-edit-icon';
-          projectEditIcon.src = './assets/imgs/icons/edit.png';
+        let projectEdit = document.createElement('div');
+        projectEdit.classList.add('project-edit');
+        let projectEditIcon = document.createElement('img');
+        projectEditIcon.className = 'icon project-edit-icon';
+        projectEditIcon.src = './assets/imgs/icons/edit.png';
 
-          projectEdit.appendChild(projectEditIcon);
+        projectEdit.appendChild(projectEditIcon);
 
-          //FUNCTION LISTENER - TO EDIT THE CURRENT PROJECT
-          projectEdit.addEventListener('click',function() {
-            createProjectMenuSpawner(project);
-          });
+        //FUNCTION LISTENER - TO EDIT THE CURRENT PROJECT
+        projectEdit.addEventListener('click', function() {
+          createProjectMenuSpawner(project);
+        });
 
-          //More details arrow ================== and function listener
-          let projectMoreDetails = document.createElement('div');
-          projectMoreDetails.classList.add('project-more-details-container');
-          let projectMoreDetailsArrow = document.createElement('img');
-          projectMoreDetailsArrow.className = 'icon more-details-arrow';
-          projectMoreDetailsArrow.src = './assets/imgs/icons/arrow.png';
-          projectMoreDetails.appendChild(projectMoreDetailsArrow);
-          projectMoreDetailsArrow.addEventListener("click", showMoreDetails);
+        //More details arrow ================== and function listener
+        let projectMoreDetails = document.createElement('div');
+        projectMoreDetails.classList.add('project-more-details-container');
+        let projectMoreDetailsArrow = document.createElement('img');
+        projectMoreDetailsArrow.className = 'icon more-details-arrow';
+        projectMoreDetailsArrow.src = './assets/imgs/icons/arrow.png';
+        projectMoreDetails.appendChild(projectMoreDetailsArrow);
+        projectMoreDetailsArrow.addEventListener("click", showMoreDetails);
 
-          projectMoreDetails.addEventListener('click',function(e) {
-            projectMoreDetailsArrow.classList.toggle('project-more-details-container-checked');
-          });
+        projectMoreDetails.addEventListener('click', function(e) {
+          projectMoreDetailsArrow.classList.toggle('project-more-details-container-checked');
+        });
 
-          projectDiv.appendChild(projectName);
-          projectDiv.appendChild(projectEdit);
-          projectDiv.appendChild(projectMoreDetails);
-          projectDiv.appendChild(projectTime);
-          projectDiv.appendChild(projectPriority);
+        projectDiv.appendChild(projectName);
+        projectDiv.appendChild(projectEdit);
+        projectDiv.appendChild(projectMoreDetails);
+        projectDiv.appendChild(projectTime);
+        projectDiv.appendChild(projectPriority);
 
 
-          //The big actual ROW ===================================
-          let projectDivAll = document.createElement('div');
-          projectDivAll.classList.add('project-main');
+        //The big actual ROW ===================================
+        let projectDivAll = document.createElement('div');
+        projectDivAll.classList.add('project-main');
 
-          let moreDetailsDiv = document.createElement('div');
-          moreDetailsDiv.className = 'project-more-details d-none';
-          let moreDetailsText = document.createElement('div');
-          moreDetailsText.className = 'more-details-text';
-          moreDetailsText.innerHTML = project.description;
-          moreDetailsDiv.appendChild(moreDetailsText);
+        let moreDetailsDiv = document.createElement('div');
+        moreDetailsDiv.className = 'project-more-details d-none';
+        let moreDetailsText = document.createElement('div');
+        moreDetailsText.className = 'more-details-text';
+        moreDetailsText.innerHTML = project.description;
+        moreDetailsDiv.appendChild(moreDetailsText);
 
-          projectDivAll.appendChild(projectDiv);
-          projectDivAll.appendChild(moreDetailsDiv);
+        projectDivAll.appendChild(projectDiv);
+        projectDivAll.appendChild(moreDetailsDiv);
 
-          //Div for all the toDoS
-          let toDosDiv = document.createElement('div');
-          toDosDiv.className = 'to-do-container';
+        //Div for all the toDoS
+        let toDosDiv = document.createElement('div');
+        toDosDiv.className = 'to-do-container';
 
-          //Main "adder" of toDos
-          let toDoAdd = document.createElement('div');
-          toDoAdd.classList.add('to-do-add-div');
-          let toDoAddIcon = document.createElement('img');
-          toDoAddIcon.classList.add('icon');
-          toDoAddIcon.classList.add('to-do-add-icon');
-          toDoAddIcon.src = './assets/imgs/icons/plus.png';
-          let toDoAddTextDiv = document.createElement('div');
-          toDoAddTextDiv.classList.add('to-do-add-text-div');
-          let toDoAddText = document.createElement('div');
-          toDoAddText.classList.add('to-do-add-text');
-          toDoAddText.innerHTML = 'ADD MORE TODOS';
+        //Main "adder" of toDos
+        let toDoAdd = document.createElement('div');
+        toDoAdd.classList.add('to-do-add-div');
+        let toDoAddIcon = document.createElement('img');
+        toDoAddIcon.classList.add('icon');
+        toDoAddIcon.classList.add('to-do-add-icon');
+        toDoAddIcon.src = './assets/imgs/icons/plus.png';
+        let toDoAddTextDiv = document.createElement('div');
+        toDoAddTextDiv.classList.add('to-do-add-text-div');
+        let toDoAddText = document.createElement('div');
+        toDoAddText.classList.add('to-do-add-text');
+        toDoAddText.innerHTML = 'ADD MORE TODOS';
 
-          //ADDING TODOS
-          toDoAdd.addEventListener('click',function() {
-            createToDoMenuSpawner(false,project);
-          });
+        //ADDING TODOS
+        toDoAdd.addEventListener('click', function() {
+          createToDoMenuSpawner(false, project);
+        });
 
-          // create TODOS for every toDo instance in the project todo array.
-          createToDoRow(project.toDos,toDosDiv,project);
+        // create TODOS for every toDo instance in the project todo array.
+        createToDoRow(project.toDos, toDosDiv, project);
 
-          toDoAdd.appendChild(toDoAddIcon);
-          toDoAddTextDiv.appendChild(toDoAddText);
-          toDoAdd.appendChild(toDoAddTextDiv);
-          toDosDiv.insertAdjacentElement('afterbegin',toDoAdd);
+        toDoAdd.appendChild(toDoAddIcon);
+        toDoAddTextDiv.appendChild(toDoAddText);
+        toDoAdd.appendChild(toDoAddTextDiv);
+        toDosDiv.insertAdjacentElement('afterbegin', toDoAdd);
 
-          projectDivAll.appendChild(toDosDiv);
+        projectDivAll.appendChild(toDosDiv);
 
-          projectMainContainer.appendChild(projectDivAll);
-        } else {
-          console.log('i is NOT an instance of Project, can not do shiet');
-        }
+        projectMainContainer.appendChild(projectDivAll);
+      } else {
+        console.log('i is NOT an instance of Project, can not do shiet');
+      }
     }
   };
 
   //delete project function
-  function deleteProject(project,event) {
+  function deleteProject(project, event) {
     if (projectsArray.includes(project)) {
       project.idToArray;
-      projectsArray.splice(projectsArray.indexOf(project),1);
+      projectsArray.splice(projectsArray.indexOf(project), 1);
       saveToLocalStorage(projectsArray);
       createProjectNamesDiv(projectsArray);
     }
@@ -903,7 +910,7 @@ function editToDo(project,toDo) {
         trashBinIcon.className = 'icon trash-bin-icon-div';
         trashBinIcon.src = './assets/imgs/icons/delete.png';
 
-        trashBinIcon.addEventListener('click',deleteProject.bind(this,i));
+        trashBinIcon.addEventListener('click', deleteProject.bind(this, i));
 
         trashBinDiv.appendChild(trashBinIcon);
         projectNameContainer.appendChild(trashBinDiv);
@@ -912,7 +919,7 @@ function editToDo(project,toDo) {
         projectNamesContainer.appendChild(projectNameContainer);
 
         //Adding an event - showing the project in main Project Container.
-        projectNameContainer.addEventListener('click',renderProjectMain.bind(this,i));
+        projectNameContainer.addEventListener('click', renderProjectMain.bind(this, i));
 
       }
       //Add a ADD MORE PROJECTS button
@@ -927,7 +934,7 @@ function editToDo(project,toDo) {
       moreProjectDiv.appendChild(moreProjectIcon);
       moreProjectDiv.appendChild(moreProjectText);
 
-      moreProjectDiv.addEventListener('click',function() {
+      moreProjectDiv.addEventListener('click', function() {
         createProjectMenuSpawner();
       });
 
@@ -938,30 +945,35 @@ function editToDo(project,toDo) {
     }
   };
 
-//a fast project population function
-const populate = () => {
+  //a fast project population function
+  const populate = () => {
 
-  //Adds a ADD MORE PROJECTS button on start.
-  let moreProjectDiv = document.createElement('DIV');
-  moreProjectDiv.className = 'more-projects-row';
-  let moreProjectIcon = document.createElement('DIV');
-  moreProjectIcon.className = 'more-projects-row-icon';
-  let moreProjectText = document.createElement('DIV');
-  moreProjectText.className = 'more-projects-row-text';
-  moreProjectText.innerHTML = 'ADD MORE PROJECTS';
-  moreProjectDiv.appendChild(moreProjectIcon);
-  moreProjectDiv.appendChild(moreProjectText);
+    //Adds a ADD MORE PROJECTS button on start.
+    let moreProjectDiv = document.createElement('DIV');
+    moreProjectDiv.className = 'more-projects-row';
+    let moreProjectIcon = document.createElement('DIV');
+    moreProjectIcon.className = 'more-projects-row-icon';
+    let moreProjectText = document.createElement('DIV');
+    moreProjectText.className = 'more-projects-row-text';
+    moreProjectText.innerHTML = 'ADD MORE PROJECTS';
+    moreProjectDiv.appendChild(moreProjectIcon);
+    moreProjectDiv.appendChild(moreProjectText);
 
-  moreProjectDiv.addEventListener('click',function() {
-    createProjectMenuSpawner();
-  });
+    moreProjectDiv.addEventListener('click', function() {
+      createProjectMenuSpawner();
+    });
 
-  projectNamesContainer.appendChild(moreProjectDiv);
+    projectNamesContainer.appendChild(moreProjectDiv);
 
-};
+  };
 
   return {
-    assignProjectNameContainer,assignProjectMainContainer,renderProjectMain,deleteAllChildNodes,createProjectNamesDiv,populate
+    assignProjectNameContainer,
+    assignProjectMainContainer,
+    renderProjectMain,
+    deleteAllChildNodes,
+    createProjectNamesDiv,
+    populate
   };
 })();
 

@@ -15,13 +15,14 @@
   "author": "Christopher",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
     "browser-sync": "^2.26.7",
-    "run-script-os": "^1.0.3",
+    "eslint": "^6.7.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
-    "gulp-minify-css": "^1.2.4"
+    "gulp-minify-css": "^1.2.4",
+    "run-script-os": "^1.0.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "date-fns": "^2.8.1"

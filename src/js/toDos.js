@@ -1,4 +1,3 @@
-
 // toDo's are objects included in Projects.
 
 //Id variables ======================================================================
@@ -15,7 +14,7 @@
 
 //Main class for toDo objects
 class toDoClass {
-  constructor(title,description,priority,icon) {
+  constructor(title, description, priority, icon) {
     this._title = title;
     this._description = description;
     // this._dueDate = dueDate;

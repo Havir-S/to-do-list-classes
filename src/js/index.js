@@ -1,4 +1,8 @@
-import {arrayOfProjectIdToBeAssignedAfterDeletingItems, Project, projectIdCount} from './Projects.js';
+import {
+  arrayOfProjectIdToBeAssignedAfterDeletingItems,
+  Project,
+  projectIdCount
+} from './Projects.js';
 import DOMStuff from './DOM.js';
 import toDoClass from './toDos.js';
 
@@ -26,11 +30,11 @@ DOMStuff.populate();
 //LOCAL STORAGE FUNCTION
 function saveToLocalStorage(x) {
   var y = JSON.stringify(x);
-  localStorage.setItem('projectsArray',y);
+  localStorage.setItem('projectsArray', y);
   var jsonIdArray = JSON.stringify(arrayOfProjectIdToBeAssignedAfterDeletingItems);
   localStorage.setItem('idArray', jsonIdArray);
   var jsonIdCount = JSON.stringify(projectIdCount);
-  localStorage.setItem('idCount',jsonIdCount);
+  localStorage.setItem('idCount', jsonIdCount);
 }
 //LOCAL STORAGE SEARCH AND USE
 const checkForStorage = () => {
@@ -39,13 +43,13 @@ const checkForStorage = () => {
     //Since i can't go around putting Objects into localStorage, i guess i'll have to make new Projects from them.
     for (var i = 0; i < loadedProjectsArray.length; i++) {
       let newProject = new Project(loadedProjectsArray[i]._title,
-                                   loadedProjectsArray[i]._description,
-                                   loadedProjectsArray[i]._dueDate,
-                                   loadedProjectsArray[i]._id);
+        loadedProjectsArray[i]._description,
+        loadedProjectsArray[i]._dueDate,
+        loadedProjectsArray[i]._id);
       let arrayOfToDos = Array.from(loadedProjectsArray[i]._toDos);
 
       for (var j of arrayOfToDos) {
-        let newToDo = new toDoClass(j._title,j._description,j._priority,j._icon);
+        let newToDo = new toDoClass(j._title, j._description, j._priority, j._icon);
         newProject.addToDo(newToDo);
       }
       projectsArray.push(newProject);
@@ -53,27 +57,26 @@ const checkForStorage = () => {
 
 
     DOMStuff.createProjectNamesDiv(projectsArray);
-  } else {
-  }
+  } else {}
 };
 
- function projectsIdLocalStorageSetup(idArray, idCounter) {
-   if (localStorage.getItem('idArray')) {
-     idArray = Array.from(JSON.parse(localStorage.getItem('idArray')));
-   }
+function projectsIdLocalStorageSetup(idArray, idCounter) {
+  if (localStorage.getItem('idArray')) {
+    idArray = Array.from(JSON.parse(localStorage.getItem('idArray')));
+  }
 
-   if (localStorage.getItem('idCount')) {
-     idCounter = Number(JSON.parse(localStorage.getItem('idCount')));
-   }
- }
+  if (localStorage.getItem('idCount')) {
+    idCounter = Number(JSON.parse(localStorage.getItem('idCount')));
+  }
+}
 
 
 //Function for creating and editing projects
 function projectHandler(project) {
   let titleInput = document.querySelector('input[name="project-title"]'),
-      descriptionInput = document.querySelector(`input[name='project-description']`),
-      dateInput = document.querySelector(`input[name='project-date']`),
-      priorityInput = document.querySelector(`input[name='project-priority']`);
+    descriptionInput = document.querySelector(`input[name='project-description']`),
+    dateInput = document.querySelector(`input[name='project-date']`),
+    priorityInput = document.querySelector(`input[name='project-priority']`);
   //if project is true - we are editing a new project
   if (project) {
     projectsArray[projectsArray.indexOf(project)].title = titleInput.value;
@@ -85,16 +88,16 @@ function projectHandler(project) {
     projectsArray[projectsArray.indexOf(project)];
 
   } else {
-  //if project is false - we are making a new project
+    //if project is false - we are making a new project
 
-      if(titleInput.value && descriptionInput.value && dateInput.value && priorityInput.value) {
-        let newProject = new Project(titleInput.value,descriptionInput.value,
-                                     dateInput.value,priorityInput.value);
-        projectsArray.push(newProject);
-        DOMStuff.createProjectNamesDiv(projectsArray);
-      } else {
-        console.error('You need to fill the fields to create a project');
-      }
+    if (titleInput.value && descriptionInput.value && dateInput.value && priorityInput.value) {
+      let newProject = new Project(titleInput.value, descriptionInput.value,
+        dateInput.value, priorityInput.value);
+      projectsArray.push(newProject);
+      DOMStuff.createProjectNamesDiv(projectsArray);
+    } else {
+      console.error('You need to fill the fields to create a project');
+    }
   }
   saveToLocalStorage(projectsArray);
 }
@@ -103,11 +106,11 @@ function projectHandler(project) {
 
 
 //Function for creating and editing toDos
-function toDoHandler(x,y) {
+function toDoHandler(x, y) {
   let titleInput = document.querySelector('input[name="todo-title"]'),
-      descriptionInput = document.querySelector(`input[name='todo-description']`),
-      priorityInput = document.querySelector(`input[name='todo-priority']`),
-      choosenIcon = document.querySelector('.icon-container-img-checked');
+    descriptionInput = document.querySelector(`input[name='todo-description']`),
+    priorityInput = document.querySelector(`input[name='todo-priority']`),
+    choosenIcon = document.querySelector('.icon-container-img-checked');
   if (y) {
     //IN THIS CASE ==================== X IS EQUAL TO THE PROJECT, THE TODO WILL BE ASSIGNED TO it
     // IF Y is true, then we are EDITING A TODO. Y == toDo
@@ -120,29 +123,35 @@ function toDoHandler(x,y) {
   } else {
     //IF Y IS FALSE, THEN WE ARE MAKING A NEW ONE
 
-        if (titleInput.value && descriptionInput.value && priorityInput.value) {
-          if (choosenIcon) {
-            let newToDo = new toDoClass(titleInput.value,descriptionInput.value,
-                                        priorityInput.value,choosenIcon.src);
-            x.addToDo(newToDo);
-            DOMStuff.renderProjectMain(x);
-          } else {
-            choosenIcon = './assets/imgs/icons/notification.png';
-            let newToDo = new toDoClass(titleInput.value,descriptionInput.value,
-                                        priorityInput.value,choosenIcon);
-            x.addToDo(newToDo);
-            DOMStuff.renderProjectMain(x);
-          }
+    if (titleInput.value && descriptionInput.value && priorityInput.value) {
+      if (choosenIcon) {
+        let newToDo = new toDoClass(titleInput.value, descriptionInput.value,
+          priorityInput.value, choosenIcon.src);
+        x.addToDo(newToDo);
+        DOMStuff.renderProjectMain(x);
+      } else {
+        choosenIcon = './assets/imgs/icons/notification.png';
+        let newToDo = new toDoClass(titleInput.value, descriptionInput.value,
+          priorityInput.value, choosenIcon);
+        x.addToDo(newToDo);
+        DOMStuff.renderProjectMain(x);
+      }
 
-        } else {
-          console.error('You need to fill all the fields in order to create a toDo');
-        }
+    } else {
+      console.error('You need to fill all the fields in order to create a toDo');
+    }
   }
   saveToLocalStorage(projectsArray);
 }
 
 checkForStorage();
 
-export {projectsArray,resetValue,projectHandler,toDoHandler,
-        saveToLocalStorage,projectsIdLocalStorageSetup};
+export {
+  projectsArray,
+  resetValue,
+  projectHandler,
+  toDoHandler,
+  saveToLocalStorage,
+  projectsIdLocalStorageSetup
+};
 export default projectsArray;
