@@ -2,7 +2,7 @@
   "name": "PROJECT-TO-DO-LIST",
   "version": "1.0.0",
   "description": "",
-  "main": "/dist/index.html",
+  "main": "dist/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch --config webpack.config.js",
@@ -25,6 +25,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "date-fns": "^2.8.1"
+    "date-fns": "^2.8.1",
+    "gh-pages": "^2.1.1"
   }
 }
