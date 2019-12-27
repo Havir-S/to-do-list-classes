@@ -2,7 +2,7 @@
   "name": "PROJECT-TO-DO-LIST",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "/dist/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch --config webpack.config.js",
